@@ -42,9 +42,24 @@ like `https://api.lu.ma/ics/get?entity=cal-XXXX`. Paste into `config.js` →
 ### 4. Deploy (GitHub Actions — free)
 1. Push this repo to GitHub.
 2. Repo → Settings → Secrets and variables → Actions → add
-   `TELEGRAM_BOT_TOKEN` and `TELEGRAM_CHAT_ID`.
-3. Actions tab → enable workflows. Runs daily 08:00 IST.
+   `TELEGRAM_BOT_TOKEN` and `TELEGRAM_CHAT_ID`. **Without these the run is dry:**
+   it still records everything into `seen.json`, so the backlog is consumed
+   silently and those events never reach you.
+3. Repo → Settings → Actions → General → Workflow permissions →
+   **Read and write**. New repos default to read-only, which makes the
+   `seen.json` commit at the end of the run fail — and it fails *green*, because
+   the push is wrapped in `|| echo`. Symptom: every hourly run re-alerts events
+   you were already sent.
+4. Seed once, so the existing backlog (~240 events) doesn't land as one flood:
+   ```bash
+   node src/radar.js --seed
+   git add data/seen.json && git commit -m "seed seen state" && git push
+   ```
+5. Actions tab → enable workflows. Runs **hourly** (`0 * * * *`).
    Hit "Run workflow" once to test.
+
+GitHub disables scheduled workflows after 60 days of repo inactivity, and cron on
+a busy hour commonly lags 10–20 minutes. Neither is worth fighting.
 
 ## Tuning
 Everything in `config.js`: keywords, exclude list, India/remote toggle, Luma ICS
