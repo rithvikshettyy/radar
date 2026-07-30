@@ -723,12 +723,24 @@
     "remindedForDeadline": false
   },
   "luma-discover:brnswn": {
-    "remindedForDeadline": false
+    "remindedForDeadline": true
   },
   "hackerearth:rkhe74": {
     "remindedForDeadline": false
   },
   "hackerearth:oa4b7n": {
+    "remindedForDeadline": false
+  },
+  "mlh:1pveuz5": {
+    "remindedForDeadline": false
+  },
+  "mlh:1bju1y": {
+    "remindedForDeadline": false
+  },
+  "mlh:zhpar6": {
+    "remindedForDeadline": false
+  },
+  "mlh:1jlu0g0": {
     "remindedForDeadline": false
   }
 }
