@@ -18,6 +18,34 @@ Runs free forever on GitHub Actions cron. No server, no paid tier.
 - Dedupes via `data/seen.json` (committed back each run).
 - Alerts on: new match, and again 48h before a deadline/start you've already seen.
 
+## Message format
+
+```
+🆕 NEW EVENT                              ⏰ DEADLINE SOON — in 9h
+
+Hacker House Goa 2026   ← tappable link   Sarvam Epoch
+
+📍 Goa · 12 spots left                    📍 Bengaluru
+⏳ Mon, 10 Aug 2026, 17:23 · in 11 days   ⏳ Fri, 31 Jul 2026, 02:23
+🗓 Posted Thu, 30 Jul 2026 (today)        🗓 Posted Sat, 25 Jul 2026 (5 days ago)
+🔗 devfolio · hhgoa.devfolio.co           🔗 luma-discover · luma.com
+```
+
+The title is the link (Telegram still builds its preview from it), so no raw URL
+line — the footer shows source + destination host instead. Any missing field drops
+its own line; an unparseable date is printed raw rather than as `Invalid Date`.
+
+**Posted date.** Almost no feed exposes a publish timestamp (checked: Devfolio,
+Devpost, HackerEarth and Luma-discover have none). Sarvam's CMS gives `_createdAt`
+and Luma ICS gives `CREATED`; those are used directly. Everything else falls back to
+`firstSeen` — the run that first spotted the event — recorded per event in
+`seen.json`, so a later deadline reminder shows the same date. Events already in
+`seen.json` before this (and anything recorded with `--seed`) have no `firstSeen`, so
+they simply omit the line instead of claiming they were posted today.
+
+Dates render in `config.timezone` (default `Asia/Kolkata`) — Actions runners are UTC,
+which would otherwise push a 9pm IST event onto the previous day.
+
 ## Setup (~10 min)
 
 ### 1. Telegram bot
@@ -95,7 +123,9 @@ a `DENY_HOSTS` list in `websearch.js` that drops listicle/aggregator domains
 
 ## Adding a source
 Drop `src/sources/foo.js` exporting `async function fetchFoo()` that returns
-`normalize({title,url,deadline,location,description}, "foo")[]`. Wire it into
+`normalize({title,url,deadline,location,description,posted}, "foo")[]` (`posted` only
+if the feed genuinely has a publish date — otherwise leave it off and `firstSeen`
+covers it). Wire it into
 `Promise.allSettled([...])` in `src/radar.js`. One failing source never kills the run.
 
 ## Notes

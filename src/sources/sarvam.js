@@ -56,6 +56,7 @@ export async function fetchSarvam() {
           title: d.title,
           url: d.slug ? `https://www.sarvam.ai/events/${d.slug}` : "https://www.sarvam.ai/events",
           deadline: d.startAt || null,
+          posted: d._createdAt || null, // real publish date from the CMS
           // Sarvam is Bengaluru-based; an offline event with no venue set is still India.
           location: online ? "Online" : d.location || "Bengaluru, India",
           description: d.description || "",

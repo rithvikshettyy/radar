@@ -1,9 +1,10 @@
 // Offline sanity test: no network, no secrets. Validates filter + dedupe + reminder logic.
-import { normalize, idFor, isRelevant, deadlineDueSoon } from "./filter.js";
+import { normalize, idFor, isRelevant, isExpired, deadlineDueSoon } from "./filter.js";
 import { toIso } from "./sources/devfolio.js";
 import { parseDdgHtml } from "./sources/websearch.js";
 import { parseDevpostRange } from "./sources/devpost.js";
 import { parseSeasonHtml } from "./sources/mlh.js";
+import { formatMessage } from "./telegram.js";
 
 let fail = 0;
 const ok = (cond, msg) => {
@@ -78,6 +79,12 @@ ok(!deadlineDueSoon({ deadline: inFuture(200) }), "200h out -> not yet");
 ok(!deadlineDueSoon({ deadline: inFuture(-5) }), "past deadline -> no");
 ok(!deadlineDueSoon({ deadline: null }), "no deadline -> no");
 
+// expiry gate: entry closed = not news, even if the event itself is still running
+ok(isExpired({ deadline: inFuture(-1) }), "deadline an hour ago -> expired");
+ok(!isExpired({ deadline: inFuture(1) }), "deadline an hour out -> live");
+ok(!isExpired({ deadline: null }), "no deadline -> kept, not expired");
+ok(!isExpired({ deadline: "sometime soon" }), "unparseable deadline -> kept");
+
 // devfolio timestamp normalization (unix seconds, unix ms, ISO string, null)
 const isoSec = toIso(1893456000); // 2030-ish unix seconds
 const isoMs = toIso(1893456000000); // same in ms
@@ -143,6 +150,42 @@ ok(ddgHits[0].url === "https://epoch.sarvam.ai/", "ddg: direct href kept as-is")
 ok(ddgHits[1].url === "https://example.com/hack", "ddg: uddg-wrapped href unwrapped");
 ok(ddgHits[0].description === "Two days of AI in Bengaluru.", "ddg: snippet captured");
 ok(parseDdgHtml("<html><body>anomaly detected</body></html>").length === 0, "ddg: block page -> 0 hits");
+
+// Telegram message shape. Broken markup here doesn't fail a run — Telegram just
+// rejects the send (400) or renders tags as literal text — so assert it offline.
+const msgEvent = {
+  ...normalize(
+    {
+      title: "GenAI <Buildathon> & Demo",
+      url: "https://hhgoa.devfolio.co/?a=1",
+      deadline: inFuture(72),
+      location: "Bengaluru, India",
+      posted: new Date().toISOString(),
+    },
+    "devfolio"
+  ),
+};
+const newMsg = formatMessage(msgEvent, false);
+ok(newMsg.startsWith("🆕 <b>NEW EVENT</b>"), "msg: new-event header");
+ok(newMsg.includes('<a href="https://hhgoa.devfolio.co/?a=1">'), "msg: title carries the link");
+ok(newMsg.includes("GenAI &lt;Buildathon&gt; &amp; Demo"), "msg: title html-escaped");
+ok(!newMsg.includes("<Buildathon>"), "msg: no raw angle brackets leak into HTML mode");
+ok(newMsg.includes("📍 Bengaluru, India"), "msg: location line");
+ok(/⏳ <b>[A-Z][a-z]{2}, \d{1,2} [A-Z][a-z]{2} \d{4}, \d{2}:\d{2}<\/b> · in 3 days/.test(newMsg), "msg: deadline + countdown");
+ok(/🗓 Posted .+ \(today\)/.test(newMsg), "msg: posted date with relative day");
+ok(newMsg.includes("🔗 devfolio · hhgoa.devfolio.co"), "msg: source + host footer");
+
+const remindMsg = formatMessage({ ...msgEvent, deadline: inFuture(10) }, true);
+ok(remindMsg.startsWith("⏰ <b>DEADLINE SOON</b> — in 10h"), "msg: reminder header carries the countdown");
+ok(!/<\/b> · in \d/.test(remindMsg), "msg: reminder doesn't repeat the countdown on the deadline line");
+
+// Missing/garbage fields must degrade, not produce "Invalid Date" or empty lines.
+const sparse = formatMessage(normalize({ title: "Bare Event" }, "search"), false);
+ok(!sparse.includes("Invalid Date"), "msg: no Invalid Date anywhere");
+ok(!sparse.includes("📍") && !sparse.includes("⏳") && !sparse.includes("🗓"), "msg: absent fields drop their lines");
+ok(sparse.includes("<b>Bare Event</b>") && !sparse.includes("<a href"), "msg: no url -> plain bold title");
+ok(formatMessage({ ...msgEvent, deadline: "sometime in spring" }, false).includes("⏳ <b>sometime in spring</b>"), "msg: unparseable date shown raw");
+ok(formatMessage({ ...msgEvent, title: "" }, false).includes("(untitled)"), "msg: empty title placeholder");
 
 console.log(fail ? `\n${fail} FAILED` : "\nALL PASS");
 process.exit(fail ? 1 : 0);

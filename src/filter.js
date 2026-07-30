@@ -32,6 +32,10 @@ export function normalize(raw, source, opts = {}) {
     title: (raw.title || "").trim(),
     url: (raw.url || "").trim(),
     deadline: raw.deadline || null, // ISO string or null
+    // When the source published it. Only a few feeds expose this (Sarvam's CMS
+    // _createdAt, Luma's ICS CREATED); for the rest radar.js fills in the day it
+    // first saw the event, which is the closest honest answer.
+    posted: raw.posted || null,
     location: (raw.location || "").trim(),
     blob: lc([raw.title, raw.location, raw.description, raw.tags].join(" ")),
   };
@@ -47,6 +51,16 @@ export function isRelevant(ev) {
     if (!config.indiaOrRemoteHints.some((k) => hasWord(t, k))) return false;
   }
   return true;
+}
+
+// Deadline already gone -> you can't enter, so it's not news. Sources set deadline to
+// the actionable date (registration close), which can pass while the event still runs,
+// so a source's own "is it over" check doesn't cover this. No deadline -> keep: most
+// search hits and Luma entries never carry one, and dropping them would gut the feed.
+export function isExpired(ev, now = Date.now()) {
+  if (!ev.deadline) return false;
+  const dl = Date.parse(ev.deadline);
+  return !Number.isNaN(dl) && dl < now;
 }
 
 // Should we re-alert an already-seen event because a deadline is near?

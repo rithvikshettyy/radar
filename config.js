@@ -66,4 +66,8 @@ export const config = {
 
   // Re-alert this many hours before a deadline/start you've already seen once.
   deadlineReminderHours: 48,
+
+  // Timezone for dates in Telegram messages. GitHub Actions runners are UTC, so
+  // without this a 9pm IST event shows the previous day. Any IANA zone name.
+  timezone: "Asia/Kolkata",
 };

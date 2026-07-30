@@ -17,6 +17,9 @@ export async function fetchLuma() {
               title: ev.summary,
               url: ev.url || ev.uid,
               deadline: ev.start ? new Date(ev.start).toISOString() : null,
+              // ICS CREATED is when the organiser published it; DTSTAMP is when the
+              // feed was generated (i.e. now), so it's only a last resort.
+              posted: ev.created ? new Date(ev.created).toISOString() : null,
               location: ev.location || "",
               description: ev.description || "",
             },

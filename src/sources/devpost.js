@@ -12,7 +12,9 @@ import { normalize } from "../filter.js";
 // We want the END of that range, since that's the submission deadline.
 const URLS = [
   "https://devpost.com/api/hackathons?challenge_type[]=online&status[]=open&order_by=recently-added",
-  "https://devpost.com/api/hackathons?search=ai&order_by=recently-added",
+  // status[]=open on both: without it the search query happily returns hackathons
+  // whose submission window shut months ago.
+  "https://devpost.com/api/hackathons?search=ai&status[]=open&order_by=recently-added",
 ];
 
 const MONTH = /^(jan|feb|mar|apr|may|jun|jul|aug|sep|oct|nov|dec)/i;
