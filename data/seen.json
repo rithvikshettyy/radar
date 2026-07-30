@@ -252,7 +252,7 @@
     "remindedForDeadline": true
   },
   "luma-discover:uumge1": {
-    "remindedForDeadline": false
+    "remindedForDeadline": true
   },
   "luma-discover:1wtweqt": {
     "remindedForDeadline": false
@@ -742,5 +742,8 @@
   },
   "mlh:1jlu0g0": {
     "remindedForDeadline": false
+  },
+  "devpost:je07qm": {
+    "remindedForDeadline": true
   }
 }
