@@ -2,6 +2,7 @@
 import { normalize, idFor, isRelevant, deadlineDueSoon } from "./filter.js";
 import { toIso } from "./sources/devfolio.js";
 import { parseDdgHtml } from "./sources/websearch.js";
+import { parseDevpostRange } from "./sources/devpost.js";
 
 let fail = 0;
 const ok = (cond, msg) => {
@@ -90,6 +91,23 @@ const devfolioGoa = normalize(
   { precurated: true }
 );
 ok(isRelevant(devfolioGoa), "devfolio Hacker House Goa passes");
+
+// Devpost date range -> deadline. It has no machine-readable end field, only a
+// display string, and feeding that to new Date() rendered "Invalid Date" in Telegram
+// while silently killing every devpost 48h reminder (Date.parse -> NaN -> false).
+ok(parseDevpostRange("Jul 28 - Aug 12, 2026") === "2026-08-12T23:59:00.000Z", "devpost: cross-month range -> end date");
+ok(parseDevpostRange("Jul 27 - 31, 2026") === "2026-07-31T23:59:00.000Z", "devpost: day-only end inherits month");
+ok(parseDevpostRange("Dec 20, 2026 - Jan 5, 2027") === "2027-01-05T23:59:00.000Z", "devpost: end carries its own year");
+ok(parseDevpostRange("Jul 28, 2026") === "2026-07-28T23:59:00.000Z", "devpost: single day");
+ok(parseDevpostRange("Jul 28, 2026 - Aug 12") === "2026-08-12T23:59:00.000Z", "devpost: year-less end inherits year");
+ok(parseDevpostRange("Jul 28 – Aug 12, 2026") === "2026-08-12T23:59:00.000Z", "devpost: en-dash tolerated");
+ok(parseDevpostRange(null) === null && parseDevpostRange("") === null, "devpost: empty -> null");
+ok(parseDevpostRange("sometime next spring") === null, "devpost: unparseable -> null, not Invalid Date");
+// End-of-day matters: a deadline today must still be 'due soon', not already past.
+const todayEnd = parseDevpostRange(
+  new Date().toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric", timeZone: "UTC" })
+);
+ok(deadlineDueSoon({ deadline: todayEnd }), "devpost: a deadline dated today is still live");
 
 // DuckDuckGo markup parsing — the bit that rots silently when DDG changes its HTML.
 // Both href shapes: POST gives a direct URL, GET wraps it in /l/?uddg=<encoded>.

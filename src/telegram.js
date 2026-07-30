@@ -5,8 +5,17 @@ function esc(s) {
   return (s || "").replace(/[<&>]/g, (c) => ({ "<": "&lt;", ">": "&gt;", "&": "&amp;" }[c]));
 }
 
+// Never render "Invalid Date": if a source hands us something unparseable, show the
+// raw value — it's usually still human-readable — rather than leaking JS internals.
+function fmtDate(v) {
+  if (!v) return "";
+  const t = Date.parse(v);
+  return Number.isNaN(t) ? String(v) : new Date(t).toDateString();
+}
+
 function fmt(ev, reminder) {
-  const dl = ev.deadline ? `\n⏳ ${new Date(ev.deadline).toDateString()}` : "";
+  const d = fmtDate(ev.deadline);
+  const dl = d ? `\n⏳ ${esc(d)}` : "";
   const tag = reminder ? "⏰ DEADLINE SOON" : "🆕 NEW";
   const loc = ev.location ? ` · ${esc(ev.location)}` : "";
   return `${tag} [${ev.source}]${loc}\n<b>${esc(ev.title)}</b>${dl}\n${esc(ev.url)}`;
