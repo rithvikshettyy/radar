@@ -10,7 +10,6 @@ Runs free forever on GitHub Actions cron. No server, no paid tier.
   - **Devfolio** (public API) — India's main hackathon host: Hacker House Goa, most Indian hackathons. Precurated (skips keyword gate). No key, no config.
   - **Luma calendars** (ICS) — communities you explicitly subscribe to.
   - **Luma discover** (public API) — sweeps `ai`+`tech` events around Indian cities incl. Goa. Catches one-off events NOT in any calendar: hacker houses, makeathons, demo days, Sarvam Epoch satellites. Surfaces `sold out` / `N spots left`.
-  - **Unstop** (public API) — the other big Indian host, college-heavy. Self-gates to AI events before the shared filter (see below). No key.
   - **HackerEarth** (public API) — hackathon + competitive challenges. No key.
   - **Sarvam** (public Sanity dataset) — Sarvam Epoch, webinars, hackathons straight from the CMS behind sarvam.ai/events. Precurated. No key.
   - **MLH** (scrape) — student hackathon season.
@@ -87,19 +86,12 @@ For events announced only on a standalone site / LinkedIn / X. Works with no key
 **DDG caveat, by design:** unofficial endpoint, and DuckDuckGo throttles shared CI
 egress IPs — an Actions run can legitimately return `ddg fail: blocked (anomaly page)`
 and zero hits. The sweep stops at the first block instead of hammering. Treat it as a
-bonus net; Devfolio/Unstop/Luma are the sources you actually rely on. Want it reliable?
+bonus net; Devfolio/Luma are the sources you actually rely on. Want it reliable?
 Set `BRAVE_API_KEY` (2k queries/mo free) and `auto` switches over.
 
 Search hits aren't precurated, so they face the full keyword + India/remote gate, plus
 a `DENY_HOSTS` list in `websearch.js` that drops listicle/aggregator domains
 (reskilll, internshala, YouTube, Reddit …). Tune queries in `config.searchQueries`.
-
-### Why Unstop filters itself
-Unstop has ~110 open hackathons at any moment, mostly non-AI college events, and their
-blurbs all contain the word "hackathon" — which is in `config.include`, so nearly all of
-them would pass the shared gate. So `unstop.js` pre-filters on `config.include` **minus**
-generic event words, matched against title + required skills only. 107 fetched → 12 kept.
-Edit `GENERIC` in that file to change what counts as a non-AI-signal word.
 
 ## Adding a source
 Drop `src/sources/foo.js` exporting `async function fetchFoo()` that returns

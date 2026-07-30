@@ -53,7 +53,7 @@ export const config = {
   //   "brave" force Brave (skips with a log line if the key is missing)
   //   "off"   no web search at all
   // DDG blocks shared CI IPs at will, so an Actions run may return nothing —
-  // the structured sources (devfolio/unstop/luma) are what you actually rely on.
+  // the structured sources (devfolio/luma) are what you actually rely on.
   webSearch: { provider: "auto" },
 
   searchQueries: [

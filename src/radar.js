@@ -4,7 +4,6 @@ import { fetchDevfolio } from "./sources/devfolio.js";
 import { fetchLuma } from "./sources/luma.js";
 import { fetchLumaDiscover } from "./sources/luma-discover.js";
 import { fetchMLH } from "./sources/mlh.js";
-import { fetchUnstop } from "./sources/unstop.js";
 import { fetchHackerEarth } from "./sources/hackerearth.js";
 import { fetchSarvam } from "./sources/sarvam.js";
 import { fetchWebSearch } from "./sources/websearch.js";
@@ -35,7 +34,6 @@ async function main() {
     fetchLuma(),
     fetchLumaDiscover(),
     fetchMLH(),
-    fetchUnstop(),
     fetchHackerEarth(),
     fetchSarvam(),
     fetchWebSearch(),
