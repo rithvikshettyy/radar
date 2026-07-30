@@ -1,0 +1,16 @@
+{
+  "name": "event-radar",
+  "version": "1.0.0",
+  "description": "Polls hackathon/event sources, pushes new AI/India/remote matches to Telegram. Runs free on GitHub Actions cron.",
+  "type": "module",
+  "scripts": {
+    "start": "node src/radar.js",
+    "dry": "node src/radar.js --dry",
+    "seed": "node src/radar.js --seed",
+    "selftest": "node src/selftest.js"
+  },
+  "dependencies": {
+    "cheerio": "^1.0.0",
+    "node-ical": "^0.20.1"
+  }
+}

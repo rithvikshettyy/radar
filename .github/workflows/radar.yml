@@ -1,0 +1,31 @@
+name: event-radar
+
+on:
+  schedule:
+    - cron: "0 * * * *" # hourly — new events reach you within the hour, not next morning
+  workflow_dispatch: {} # lets you run it manually from the Actions tab
+
+permissions:
+  contents: write # to commit updated data/seen.json
+
+jobs:
+  scan:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: npm ci || npm install
+      - run: npm start
+        env:
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+          BRAVE_API_KEY: ${{ secrets.BRAVE_API_KEY }}
+      - name: persist seen state
+        run: |
+          git config user.name "event-radar"
+          git config user.email "bot@users.noreply.github.com"
+          git add data/seen.json
+          git commit -m "update seen state" || echo "no changes"
+          git push || echo "nothing to push"
