@@ -606,16 +606,16 @@
     "remindedForDeadline": false
   },
   "devfolio:13mnsqx": {
-    "remindedForDeadline": false
+    "remindedForDeadline": true
   },
   "devfolio:ov8ehg": {
-    "remindedForDeadline": false
+    "remindedForDeadline": true
   },
   "devfolio:10n17u8": {
-    "remindedForDeadline": false
+    "remindedForDeadline": true
   },
   "devfolio:styyd8": {
-    "remindedForDeadline": false
+    "remindedForDeadline": true
   },
   "devfolio:516a38": {
     "remindedForDeadline": false
@@ -690,7 +690,7 @@
     "remindedForDeadline": false
   },
   "unstop:hl9jdo": {
-    "remindedForDeadline": false
+    "remindedForDeadline": true
   },
   "unstop:1n7ao03": {
     "remindedForDeadline": false
@@ -699,10 +699,10 @@
     "remindedForDeadline": false
   },
   "unstop:1r0otpl": {
-    "remindedForDeadline": false
+    "remindedForDeadline": true
   },
   "unstop:1fv86da": {
-    "remindedForDeadline": false
+    "remindedForDeadline": true
   },
   "unstop:8j2mj0": {
     "remindedForDeadline": false
@@ -714,6 +714,21 @@
     "remindedForDeadline": false
   },
   "hackerearth:js3omx": {
+    "remindedForDeadline": true
+  },
+  "luma-discover:1gu0dgh": {
+    "remindedForDeadline": false
+  },
+  "luma-discover:5gdr98": {
+    "remindedForDeadline": false
+  },
+  "luma-discover:brnswn": {
+    "remindedForDeadline": false
+  },
+  "hackerearth:rkhe74": {
+    "remindedForDeadline": false
+  },
+  "hackerearth:oa4b7n": {
     "remindedForDeadline": false
   }
 }
