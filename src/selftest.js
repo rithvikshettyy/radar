@@ -3,6 +3,7 @@ import { normalize, idFor, isRelevant, deadlineDueSoon } from "./filter.js";
 import { toIso } from "./sources/devfolio.js";
 import { parseDdgHtml } from "./sources/websearch.js";
 import { parseDevpostRange } from "./sources/devpost.js";
+import { parseSeasonHtml } from "./sources/mlh.js";
 
 let fail = 0;
 const ok = (cond, msg) => {
@@ -108,6 +109,21 @@ const todayEnd = parseDevpostRange(
   new Date().toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric", timeZone: "UTC" })
 );
 ok(deadlineDueSoon({ deadline: todayEnd }), "devpost: a deadline dated today is still live");
+
+// MLH: payload lives in the Inertia script's TEXT, while its data-page attribute is
+// just the page name ("app") — reading the attribute instead was silently empty.
+const mlhFixture = `<script data-page="app" type="application/json">${JSON.stringify({
+  component: "EventsListing",
+  props: {
+    upcomingEvents: [{ id: "a", slug: "pec-hacks", name: "PEC HACKS", startsAt: "2026-08-29T10:30:00Z" }],
+    pastEvents: [{ id: "z", slug: "old", name: "Old Hack" }],
+  },
+})}</script>`;
+const mlhEvents = parseSeasonHtml(mlhFixture);
+ok(mlhEvents.length === 1 && mlhEvents[0].name === "PEC HACKS", "mlh: reads upcomingEvents from inertia payload");
+ok(!mlhEvents.some((e) => e.name === "Old Hack"), "mlh: pastEvents archive ignored");
+ok(parseSeasonHtml("<html><body>redesigned again</body></html>").length === 0, "mlh: missing payload -> [] not a throw");
+ok(parseSeasonHtml('<script data-page="app">{broken</script>').length === 0, "mlh: malformed JSON -> [] not a throw");
 
 // DuckDuckGo markup parsing — the bit that rots silently when DDG changes its HTML.
 // Both href shapes: POST gives a direct URL, GET wraps it in /l/?uddg=<encoded>.
