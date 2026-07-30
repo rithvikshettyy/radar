@@ -44,21 +44,18 @@ export const config = {
     ],
   },
 
-  // Devfolio (India's main hackathon host). Its list is served from Algolia.
-  // Fill these once — all three come from a single request:
-  //   devfolio.co/hackathons/open -> DevTools -> Network -> filter "algolia"
-  //   -> pick any request -> Headers: copy x-algolia-application-id + x-algolia-api-key
-  //   -> the index name is in the request URL: /1/indexes/<indexName>/queries
-  // Defaults below are the long-standing public values; if Devfolio rotates the
-  // key you'll get a 403 in logs — just recopy apiKey. Leave apiKey blank to skip.
-  devfolio: {
-    appId: "OFCNCOG2CU",
-    apiKey: "", // <-- paste the x-algolia-api-key here
-    indexName: "prod_Hackathons",
-  },
+  // Devfolio (India's main hackathon host) needs no config — it reads the same
+  // public, keyless endpoint the site's own hackathon list uses. Nothing to paste.
 
-  // OPTIONAL web-search net for events that live on no structured feed at all.
-  // Only runs if BRAVE_API_KEY env is set (Brave Search API free tier).
+  // Web-search net for events that live on no structured feed at all.
+  //   "auto"  (default) Brave if BRAVE_API_KEY is set, else DuckDuckGo scrape
+  //   "ddg"   force the keyless DuckDuckGo HTML scrape
+  //   "brave" force Brave (skips with a log line if the key is missing)
+  //   "off"   no web search at all
+  // DDG blocks shared CI IPs at will, so an Actions run may return nothing —
+  // the structured sources (devfolio/unstop/luma) are what you actually rely on.
+  webSearch: { provider: "auto" },
+
   searchQueries: [
     "AI hackathon India 2026 apply",
     "hacker house India 2026",

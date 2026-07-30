@@ -1,6 +1,7 @@
 // Offline sanity test: no network, no secrets. Validates filter + dedupe + reminder logic.
 import { normalize, idFor, isRelevant, deadlineDueSoon } from "./filter.js";
 import { toIso } from "./sources/devfolio.js";
+import { parseDdgHtml } from "./sources/websearch.js";
 
 let fail = 0;
 const ok = (cond, msg) => {
@@ -89,6 +90,25 @@ const devfolioGoa = normalize(
   { precurated: true }
 );
 ok(isRelevant(devfolioGoa), "devfolio Hacker House Goa passes");
+
+// DuckDuckGo markup parsing — the bit that rots silently when DDG changes its HTML.
+// Both href shapes: POST gives a direct URL, GET wraps it in /l/?uddg=<encoded>.
+const ddgFixture = `
+<div class="result results_links">
+  <a class="result__a" href="https://epoch.sarvam.ai/">Sarvam Epoch 2026</a>
+  <a class="result__snippet">Two days of AI in Bengaluru.</a>
+</div>
+<div class="result results_links">
+  <a class="result__a" href="//duckduckgo.com/l/?uddg=https%3A%2F%2Fexample.com%2Fhack&amp;rut=abc">Wrapped Hack</a>
+  <a class="result__snippet">Redirect-wrapped result.</a>
+</div>
+<div class="result"><a class="result__a" href="">no title or url</a></div>`;
+const ddgHits = parseDdgHtml(ddgFixture);
+ok(ddgHits.length === 2, "ddg: parses results, drops the empty one");
+ok(ddgHits[0].url === "https://epoch.sarvam.ai/", "ddg: direct href kept as-is");
+ok(ddgHits[1].url === "https://example.com/hack", "ddg: uddg-wrapped href unwrapped");
+ok(ddgHits[0].description === "Two days of AI in Bengaluru.", "ddg: snippet captured");
+ok(parseDdgHtml("<html><body>anomaly detected</body></html>").length === 0, "ddg: block page -> 0 hits");
 
 console.log(fail ? `\n${fail} FAILED` : "\nALL PASS");
 process.exit(fail ? 1 : 0);
