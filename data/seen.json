@@ -885,5 +885,9 @@
   "luma-discover:160y7bi": {
     "remindedForDeadline": true,
     "firstSeen": "2026-07-31T17:22:47.024Z"
+  },
+  "luma-discover:1mltzm5": {
+    "remindedForDeadline": false,
+    "firstSeen": "2026-07-31T19:14:21.870Z"
   }
 }
