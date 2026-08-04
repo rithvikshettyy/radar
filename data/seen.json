@@ -276,10 +276,10 @@
     "remindedForDeadline": true
   },
   "luma-discover:svvoog": {
-    "remindedForDeadline": false
+    "remindedForDeadline": true
   },
   "luma-discover:9wryck": {
-    "remindedForDeadline": false
+    "remindedForDeadline": true
   },
   "luma-discover:mbtn5s": {
     "remindedForDeadline": false
@@ -573,7 +573,7 @@
     "remindedForDeadline": true
   },
   "luma-discover:1541fqw": {
-    "remindedForDeadline": false
+    "remindedForDeadline": true
   },
   "luma-discover:ci352w": {
     "remindedForDeadline": false
@@ -751,7 +751,7 @@
     "firstSeen": "2026-07-30T15:47:00.876Z"
   },
   "luma-discover:qcyep6": {
-    "remindedForDeadline": false,
+    "remindedForDeadline": true,
     "firstSeen": "2026-07-30T15:47:00.876Z"
   },
   "luma-discover:pme0w3": {
@@ -1385,5 +1385,73 @@
   "luma-discover:el4oqc": {
     "remindedForDeadline": false,
     "firstSeen": "2026-08-04T09:35:54.367Z"
+  },
+  "luma-discover:1kw3l5o": {
+    "remindedForDeadline": false,
+    "firstSeen": "2026-08-04T11:59:08.663Z"
+  },
+  "luma-discover:othcbj": {
+    "remindedForDeadline": false,
+    "firstSeen": "2026-08-04T11:59:08.663Z"
+  },
+  "luma-discover:xh2spu": {
+    "remindedForDeadline": false,
+    "firstSeen": "2026-08-04T11:59:08.663Z"
+  },
+  "luma-discover:1u67z07": {
+    "remindedForDeadline": false,
+    "firstSeen": "2026-08-04T11:59:08.663Z"
+  },
+  "hackculture:1yeyley": {
+    "remindedForDeadline": false,
+    "firstSeen": "2026-08-04T11:59:08.663Z"
+  },
+  "hackculture:hq3s6p": {
+    "remindedForDeadline": false,
+    "firstSeen": "2026-08-04T11:59:08.663Z"
+  },
+  "hackculture:1xxezfm": {
+    "remindedForDeadline": false,
+    "firstSeen": "2026-08-04T11:59:08.663Z"
+  },
+  "hackculture:3e483i": {
+    "remindedForDeadline": false,
+    "firstSeen": "2026-08-04T11:59:08.663Z"
+  },
+  "hackculture:1xbuddf": {
+    "remindedForDeadline": false,
+    "firstSeen": "2026-08-04T11:59:08.663Z"
+  },
+  "hackculture:1nvsrq5": {
+    "remindedForDeadline": false,
+    "firstSeen": "2026-08-04T11:59:08.663Z"
+  },
+  "hackculture:1wz545g": {
+    "remindedForDeadline": false,
+    "firstSeen": "2026-08-04T11:59:08.663Z"
+  },
+  "hackculture:1bow46p": {
+    "remindedForDeadline": false,
+    "firstSeen": "2026-08-04T11:59:08.663Z"
+  },
+  "hackculture:deuk7a": {
+    "remindedForDeadline": false,
+    "firstSeen": "2026-08-04T11:59:08.663Z"
+  },
+  "hackculture:1el11yl": {
+    "remindedForDeadline": false,
+    "firstSeen": "2026-08-04T11:59:08.663Z"
+  },
+  "hackculture:kc4b18": {
+    "remindedForDeadline": false,
+    "firstSeen": "2026-08-04T11:59:08.663Z"
+  },
+  "hackculture:s3xtlk": {
+    "remindedForDeadline": false,
+    "firstSeen": "2026-08-04T11:59:08.663Z"
+  },
+  "hackculture:lqrl7l": {
+    "remindedForDeadline": false,
+    "firstSeen": "2026-08-04T11:59:08.663Z"
   }
 }
