@@ -570,7 +570,7 @@
     "remindedForDeadline": true
   },
   "luma-discover:545vbf": {
-    "remindedForDeadline": false
+    "remindedForDeadline": true
   },
   "luma-discover:1541fqw": {
     "remindedForDeadline": false
@@ -1361,5 +1361,17 @@
   "luma-discover:1u3rey1": {
     "remindedForDeadline": true,
     "firstSeen": "2026-08-04T03:59:52.908Z"
+  },
+  "luma-discover:11759l1": {
+    "remindedForDeadline": false,
+    "firstSeen": "2026-08-04T06:32:43.505Z"
+  },
+  "luma-discover:zmp3rd": {
+    "remindedForDeadline": false,
+    "firstSeen": "2026-08-04T06:32:43.505Z"
+  },
+  "luma-discover:1cy4ve7": {
+    "remindedForDeadline": false,
+    "firstSeen": "2026-08-04T06:32:43.505Z"
   }
 }
