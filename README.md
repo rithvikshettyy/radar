@@ -6,6 +6,7 @@
 ![Node](https://img.shields.io/badge/node-%E2%89%A522-339933?logo=node.js&logoColor=white)
 ![Runs on](https://img.shields.io/badge/runs%20on-GitHub%20Actions-2088FF?logo=githubactions&logoColor=white)
 ![Cost](https://img.shields.io/badge/cost-%240-brightgreen)
+[![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 
 Finding out about a hackathon the day after registration closed is the whole
 problem this solves. `event-radar` sweeps every feed that actually lists Indian
@@ -39,6 +40,7 @@ Hacker House Goa 2026   ← tappable link   Sarvam Epoch
 - [Project layout](#project-layout)
 - [Adding a source](#adding-a-source)
 - [Troubleshooting](#troubleshooting)
+- [License](#license)
 
 ---
 
@@ -267,3 +269,7 @@ source never kills the run.
   sources, or watch their Luma calendars, where they usually post anyway.
 - Want email too? Add `src/email.js` (Resend free tier) alongside `telegram.js` and
   call it in the deliver path.
+
+## License
+
+[MIT](LICENSE) © Rithvik Shetty
