@@ -19,6 +19,7 @@ export const config = {
     "india", "bengaluru", "bangalore", "mumbai", "delhi", "hyderabad",
     "pune", "chennai", "thane", "goa", "panaji", "kolkata", "ahmedabad",
     "jaipur", "kochi", "chandigarh", "noida", "gurugram", "gurgaon",
+    "mohali", "lucknow", "indore", "coimbatore", "bhubaneswar", "nagpur",
     "online", "remote", "virtual", "global",
   ],
 

@@ -1,6 +1,6 @@
 # event-radar
 
-> Hourly hackathon + AI-event radar for India. Polls 8 sources, filters, dedupes, and pushes only the new stuff to Telegram.
+> Hourly hackathon + AI-event radar for India. Polls 9 sources, filters, dedupes, and pushes only the new stuff to Telegram.
 
 [![radar](https://github.com/rithvikshettyy/radar/actions/workflows/radar.yml/badge.svg)](https://github.com/rithvikshettyy/radar/actions/workflows/radar.yml)
 ![Node](https://img.shields.io/badge/node-%E2%89%A522-339933?logo=node.js&logoColor=white)
@@ -50,6 +50,7 @@ Hacker House Goa 2026   ← tappable link   Sarvam Epoch
 |---|---|---|---|
 | **Devfolio** | public API | India's main hackathon host — Hacker House Goa, most Indian hackathons. Precurated. | no |
 | **Luma discover** | public API | Sweeps `ai` + `tech` events around 6 Indian cities incl. Goa. Catches one-off events in no calendar: hacker houses, makeathons, demo days. Surfaces `sold out` / `N spots left`. | no |
+| **HackCulture** | public API | India-focused host for corporate/campus hackathons and innovation challenges — Sarvam BuildIn' Hours, GFF fintech sprints, campus hackathons. Precurated, registration-open only. | no |
 | **Luma calendars** | ICS | Communities you explicitly subscribe to. | no |
 | **Devpost** | JSON | Global hackathons. | no |
 | **HackerEarth** | public API | Hackathons + competitive challenges. | no |
@@ -63,7 +64,7 @@ Every source runs under `Promise.allSettled`, so one dead feed never kills the r
 
 ```mermaid
 flowchart LR
-  A[8 sources<br/>Promise.allSettled] --> B[normalize]
+  A[9 sources<br/>Promise.allSettled] --> B[normalize]
   B --> C{isRelevant}
   C -->|keyword + India/remote gate| D{isExpired}
   D -->|deadline passed → drop| X[✕]
@@ -78,8 +79,8 @@ flowchart LR
 
 - **Relevance** — whole-word keyword match (`ai` hits *AI hackathon*, not *Mumbai*),
   minus an exclude list (school events), and India-or-remote only. Precurated
-  sources (Luma discover, Devfolio, Sarvam) skip the keyword gate — they're already
-  scoped — but still honor the India/remote and exclude filters.
+  sources (Luma discover, Devfolio, HackCulture, Sarvam) skip the keyword gate —
+  they're already scoped — but still honor the India/remote and exclude filters.
 - **Dedupe** — stable hash of the event URL, keyed by source. One event arriving
   twice in a run (Devpost queries two listings, Luma calendars overlap) collapses to
   the copy that actually carries a deadline.
@@ -234,8 +235,9 @@ a 9pm IST event onto the previous day.
     ├── telegram.js         # HTML message formatting + sendMessage
     ├── selftest.js         # offline checks
     └── sources/
-        ├── devfolio.js  devpost.js  hackerearth.js  mlh.js
-        └── luma.js  luma-discover.js  sarvam.js  websearch.js
+        ├── devfolio.js  devpost.js  hackculture.js
+        ├── hackerearth.js  mlh.js  sarvam.js
+        └── luma.js  luma-discover.js  websearch.js
 ```
 
 ## Adding a source
@@ -259,6 +261,7 @@ source never kills the run.
 | Every hourly run re-sends the same events | Workflow permissions are read-only, so the `seen.json` commit silently fails. Fix in Settings → Actions → General. |
 | Workflow is green but nothing arrives in Telegram | Secrets missing → dry mode. It logged `[dry] would send:` and consumed the backlog into `seen.json`. |
 | `devfolio fail: <type> <status>` in the logs | Endpoint changed. Re-derive the call from `devfolio.co/hackathons/open` → DevTools → Network. |
+| `hackculture fail: 401` | The endpoint moved to the login-only `/hackathons/all` variant. The keyless one is `GET api.hackculture.io/api/v1/hackathons?skip=&limit=` (limit ≤ 50), what `/programs` itself calls. |
 | `ddg fail: blocked (anomaly page)`, zero web hits | Expected on CI IPs. Set `BRAVE_API_KEY` if you want the net to be reliable. |
 | A source goes quiet | Devpost/MLH markup can change shape. Parsing is defensive, so it fails to zero results rather than crashing — check the run log's per-source counts. |
 | Scheduled runs stopped entirely | GitHub disables cron after 60 days of repo inactivity. Re-enable in the Actions tab. |

@@ -5,6 +5,7 @@ import { fetchLuma } from "./sources/luma.js";
 import { fetchLumaDiscover } from "./sources/luma-discover.js";
 import { fetchMLH } from "./sources/mlh.js";
 import { fetchHackerEarth } from "./sources/hackerearth.js";
+import { fetchHackCulture } from "./sources/hackculture.js";
 import { fetchSarvam } from "./sources/sarvam.js";
 import { fetchWebSearch } from "./sources/websearch.js";
 import { idFor, isRelevant, isExpired, deadlineDueSoon } from "./filter.js";
@@ -35,6 +36,7 @@ async function main() {
     fetchLumaDiscover(),
     fetchMLH(),
     fetchHackerEarth(),
+    fetchHackCulture(),
     fetchSarvam(),
     fetchWebSearch(),
   ]);
