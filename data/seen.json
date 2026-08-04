@@ -414,7 +414,7 @@
     "remindedForDeadline": true
   },
   "luma-discover:ss7jas": {
-    "remindedForDeadline": false
+    "remindedForDeadline": true
   },
   "luma-discover:y2mtv5": {
     "remindedForDeadline": false
@@ -495,7 +495,7 @@
     "remindedForDeadline": true
   },
   "luma-discover:1ycdgdc": {
-    "remindedForDeadline": false
+    "remindedForDeadline": true
   },
   "luma-discover:1whpbsu": {
     "remindedForDeadline": false
@@ -843,7 +843,7 @@
     "firstSeen": "2026-07-31T10:31:59.412Z"
   },
   "luma-discover:15ep7bd": {
-    "remindedForDeadline": false,
+    "remindedForDeadline": true,
     "firstSeen": "2026-07-31T10:31:59.412Z"
   },
   "luma-discover:ws4gvi": {
@@ -875,7 +875,7 @@
     "firstSeen": "2026-07-31T15:14:05.912Z"
   },
   "luma-discover:182ufs9": {
-    "remindedForDeadline": false,
+    "remindedForDeadline": true,
     "firstSeen": "2026-07-31T15:14:05.912Z"
   },
   "luma-discover:6j6e7s": {
@@ -1015,7 +1015,7 @@
     "firstSeen": "2026-08-02T11:57:05.139Z"
   },
   "luma-discover:1ci5z7m": {
-    "remindedForDeadline": false,
+    "remindedForDeadline": true,
     "firstSeen": "2026-08-02T11:57:05.139Z"
   },
   "luma-discover:tkhy71": {
@@ -1243,7 +1243,7 @@
     "firstSeen": "2026-08-03T10:35:54.269Z"
   },
   "luma-discover:x4srcg": {
-    "remindedForDeadline": false,
+    "remindedForDeadline": true,
     "firstSeen": "2026-08-03T10:35:54.269Z"
   },
   "luma-discover:1jjjd4": {
@@ -1453,5 +1453,73 @@
   "hackculture:lqrl7l": {
     "remindedForDeadline": false,
     "firstSeen": "2026-08-04T11:59:08.663Z"
+  },
+  "luma-discover:1dcrvvq": {
+    "remindedForDeadline": false,
+    "firstSeen": "2026-08-04T14:25:02.553Z"
+  },
+  "luma-discover:1viknof": {
+    "remindedForDeadline": true,
+    "firstSeen": "2026-08-04T14:25:02.553Z"
+  },
+  "search:oqg3or": {
+    "remindedForDeadline": false,
+    "firstSeen": "2026-08-04T14:25:02.553Z"
+  },
+  "search:1d4p6a6": {
+    "remindedForDeadline": false,
+    "firstSeen": "2026-08-04T14:25:02.553Z"
+  },
+  "search:rinh91": {
+    "remindedForDeadline": false,
+    "firstSeen": "2026-08-04T14:25:02.553Z"
+  },
+  "search:10mbmes": {
+    "remindedForDeadline": false,
+    "firstSeen": "2026-08-04T14:25:02.553Z"
+  },
+  "search:1uy1kis": {
+    "remindedForDeadline": false,
+    "firstSeen": "2026-08-04T14:25:02.553Z"
+  },
+  "search:1h86sov": {
+    "remindedForDeadline": false,
+    "firstSeen": "2026-08-04T14:25:02.553Z"
+  },
+  "search:1okpx9r": {
+    "remindedForDeadline": false,
+    "firstSeen": "2026-08-04T14:25:02.553Z"
+  },
+  "search:1hj16t3": {
+    "remindedForDeadline": false,
+    "firstSeen": "2026-08-04T14:25:02.553Z"
+  },
+  "search:nzmchs": {
+    "remindedForDeadline": false,
+    "firstSeen": "2026-08-04T14:25:02.553Z"
+  },
+  "search:dzgr21": {
+    "remindedForDeadline": false,
+    "firstSeen": "2026-08-04T14:25:02.553Z"
+  },
+  "search:rk4fa6": {
+    "remindedForDeadline": false,
+    "firstSeen": "2026-08-04T14:25:02.553Z"
+  },
+  "search:nscqzn": {
+    "remindedForDeadline": false,
+    "firstSeen": "2026-08-04T14:25:02.553Z"
+  },
+  "search:1bptv4a": {
+    "remindedForDeadline": false,
+    "firstSeen": "2026-08-04T14:25:02.553Z"
+  },
+  "search:40lokw": {
+    "remindedForDeadline": false,
+    "firstSeen": "2026-08-04T14:25:02.553Z"
+  },
+  "search:kwvmzp": {
+    "remindedForDeadline": false,
+    "firstSeen": "2026-08-04T14:25:02.553Z"
   }
 }
