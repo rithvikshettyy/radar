@@ -49,12 +49,13 @@ export const config = {
   // public, keyless endpoint the site's own hackathon list uses. Nothing to paste.
 
   // Web-search net for events that live on no structured feed at all.
-  //   "auto"  (default) Brave if BRAVE_API_KEY is set, else DuckDuckGo scrape
-  //   "ddg"   force the keyless DuckDuckGo HTML scrape
-  //   "brave" force Brave (skips with a log line if the key is missing)
-  //   "off"   no web search at all
-  // DDG blocks shared CI IPs at will, so an Actions run may return nothing —
-  // the structured sources (devfolio/luma) are what you actually rely on.
+  //   "auto"      (default) Brave if BRAVE_API_KEY is set, else Firecrawl
+  //   "firecrawl" api.firecrawl.dev — JSON, answers with no key, works from CI
+  //   "ddg"       the keyless DuckDuckGo HTML scrape (blocked on CI IPs a lot)
+  //   "brave"     force Brave (skips with a log line if the key is missing)
+  //   "off"       no web search at all
+  // Search is a bonus net either way — the structured sources (devfolio,
+  // hackculture, luma) are what you actually rely on.
   webSearch: { provider: "auto" },
 
   searchQueries: [

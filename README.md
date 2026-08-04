@@ -56,7 +56,7 @@ Hacker House Goa 2026   ← tappable link   Sarvam Epoch
 | **HackerEarth** | public API | Hackathons + competitive challenges. | no |
 | **Sarvam** | public Sanity dataset | Sarvam Epoch, webinars, hackathons straight from the CMS behind `sarvam.ai/events`. Precurated. | no |
 | **MLH** | scrape | Student hackathon season (current + next). | no |
-| **Web search** | Brave or DDG | Events that live on no structured feed at all — standalone sites, LinkedIn, X. | optional |
+| **Web search** | Firecrawl / Brave / DDG | Events that live on no structured feed at all — standalone sites, LinkedIn, X. | optional |
 
 Every source runs under `Promise.allSettled`, so one dead feed never kills the run.
 
@@ -125,7 +125,8 @@ TELEGRAM_BOT_TOKEN=xxx TELEGRAM_CHAT_ID=yyy npm start
 |---|---|---|
 | `TELEGRAM_BOT_TOKEN` | yes (to actually send) | BotFather token |
 | `TELEGRAM_CHAT_ID` | yes (to actually send) | Your numeric chat id |
-| `BRAVE_API_KEY` | no | Switches web search from the DDG scrape to Brave |
+| `BRAVE_API_KEY` | no | Switches web search to Brave |
+| `FIRECRAWL_API_KEY` | no | Raises Firecrawl's rate limit. Usually leave it unset — see below |
 
 Unset token/chat = dry mode: it prints what it *would* send.
 
@@ -188,16 +189,28 @@ For events announced only on a standalone site / LinkedIn / X. Works with no key
 
 | value | behaviour |
 |---|---|
-| `auto` *(default)* | Brave if `BRAVE_API_KEY` is set, else DuckDuckGo |
+| `auto` *(default)* | Brave if `BRAVE_API_KEY` is set, else Firecrawl |
+| `firecrawl` | force `api.firecrawl.dev/v2/search` — JSON, answers with no key |
 | `ddg` | force the keyless `html.duckduckgo.com` scrape |
 | `brave` | force Brave; logs and skips if the key is missing |
 | `off` | no web search |
 
-**DDG caveat, by design:** unofficial endpoint, and DuckDuckGo throttles shared CI
-egress IPs — an Actions run can legitimately return `ddg fail: blocked (anomaly page)`
-and zero hits. The sweep stops at the first block instead of hammering. Treat it as a
-bonus net; Devfolio/Luma are what you actually rely on. Want it reliable? Set
-`BRAVE_API_KEY` (2k queries/mo free) and `auto` switches over.
+**Why Firecrawl is the keyless default.** It answers from a GitHub Actions runner,
+which the DDG scrape mostly doesn't — DuckDuckGo throttles shared CI egress IPs, so
+those runs returned `ddg fail: blocked (anomaly page)` and zero hits. Firecrawl
+returns clean JSON and fails as a 429 rather than an HTML block page.
+
+**Don't set `FIRECRAWL_API_KEY` on a whim.** Firecrawl bills search at 2 credits per
+10 results, and the free tier is 1,000 credits/month — about 500 searches. An hourly
+cron running 5 queries needs ~3,600/month, so a keyed free account runs dry in under a
+week and then 402s. The keyless tier has no such budget. (Brave's free tier is
+2,000 queries/month, also short of 3,600 — if you set `BRAVE_API_KEY`, either accept
+that it stops partway through the month or trim `searchQueries`.)
+
+The keyless tier is documented for Firecrawl's own MCP/CLI/SDK clients; a plain
+`fetch` works today but sits outside that contract, so treat it as best-effort —
+`ddg` is still there as a fallback. Either way search is a bonus net; Devfolio,
+HackCulture and Luma are what you actually rely on.
 
 Search hits aren't precurated, so they face the full keyword + India/remote gate, plus
 a `DENY_HOSTS` list in `websearch.js` that drops listicle/aggregator domains
@@ -262,7 +275,9 @@ source never kills the run.
 | Workflow is green but nothing arrives in Telegram | Secrets missing → dry mode. It logged `[dry] would send:` and consumed the backlog into `seen.json`. |
 | `devfolio fail: <type> <status>` in the logs | Endpoint changed. Re-derive the call from `devfolio.co/hackathons/open` → DevTools → Network. |
 | `hackculture fail: 401` | The endpoint moved to the login-only `/hackathons/all` variant. The keyless one is `GET api.hackculture.io/api/v1/hackathons?skip=&limit=` (limit ≤ 50), what `/programs` itself calls. |
-| `ddg fail: blocked (anomaly page)`, zero web hits | Expected on CI IPs. Set `BRAVE_API_KEY` if you want the net to be reliable. |
+| `ddg fail: blocked (anomaly page)`, zero web hits | Expected on CI IPs — that's why `auto` uses Firecrawl instead. Only reachable now via `provider: "ddg"`. |
+| `firecrawl fail: 402` | A `FIRECRAWL_API_KEY` is set and its credits are gone. Unset it — the keyless tier has no credit budget. |
+| `firecrawl fail: 429` | Keyless rate limit. The sweep stops at the first block rather than hammering; next hourly run retries. |
 | A source goes quiet | Devpost/MLH markup can change shape. Parsing is defensive, so it fails to zero results rather than crashing — check the run log's per-source counts. |
 | Scheduled runs stopped entirely | GitHub disables cron after 60 days of repo inactivity. Re-enable in the Actions tab. |
 
