@@ -621,7 +621,7 @@
     "remindedForDeadline": true
   },
   "devfolio:1ysa5yv": {
-    "remindedForDeadline": false
+    "remindedForDeadline": true
   },
   "devfolio:3uh46a": {
     "remindedForDeadline": false
@@ -1733,5 +1733,133 @@
   "search:3welyq": {
     "remindedForDeadline": false,
     "firstSeen": "2026-08-05T17:37:20.761Z"
+  },
+  "luma-discover:x2pws3": {
+    "remindedForDeadline": false,
+    "firstSeen": "2026-08-05T19:20:32.915Z"
+  },
+  "luma-discover:189w49p": {
+    "remindedForDeadline": false,
+    "firstSeen": "2026-08-05T19:20:32.915Z"
+  },
+  "luma-discover:17czmzy": {
+    "remindedForDeadline": false,
+    "firstSeen": "2026-08-05T19:20:32.915Z"
+  },
+  "basecamp:16z0szq": {
+    "remindedForDeadline": true,
+    "firstSeen": "2026-08-05T19:20:32.915Z"
+  },
+  "basecamp:10xscin": {
+    "remindedForDeadline": true,
+    "firstSeen": "2026-08-05T19:20:32.915Z"
+  },
+  "basecamp:1byir02": {
+    "remindedForDeadline": true,
+    "firstSeen": "2026-08-05T19:20:32.915Z"
+  },
+  "basecamp:192ogup": {
+    "remindedForDeadline": true,
+    "firstSeen": "2026-08-05T19:20:32.915Z"
+  },
+  "basecamp:xp121i": {
+    "remindedForDeadline": true,
+    "firstSeen": "2026-08-05T19:20:32.915Z"
+  },
+  "basecamp:eq22k3": {
+    "remindedForDeadline": true,
+    "firstSeen": "2026-08-05T19:20:32.915Z"
+  },
+  "basecamp:mjcra4": {
+    "remindedForDeadline": true,
+    "firstSeen": "2026-08-05T19:20:32.915Z"
+  },
+  "basecamp:6hh2ey": {
+    "remindedForDeadline": true,
+    "firstSeen": "2026-08-05T19:20:32.915Z"
+  },
+  "basecamp:1apbowx": {
+    "remindedForDeadline": false,
+    "firstSeen": "2026-08-05T19:20:32.915Z"
+  },
+  "basecamp:m04vhn": {
+    "remindedForDeadline": false,
+    "firstSeen": "2026-08-05T19:20:32.915Z"
+  },
+  "basecamp:1dcrvvq": {
+    "remindedForDeadline": false,
+    "firstSeen": "2026-08-05T19:20:32.915Z"
+  },
+  "basecamp:1c25lyp": {
+    "remindedForDeadline": false,
+    "firstSeen": "2026-08-05T19:20:32.915Z"
+  },
+  "basecamp:hnq1x7": {
+    "remindedForDeadline": false,
+    "firstSeen": "2026-08-05T19:20:32.915Z"
+  },
+  "basecamp:kjnqhe": {
+    "remindedForDeadline": false,
+    "firstSeen": "2026-08-05T19:20:32.915Z"
+  },
+  "basecamp:zc6i95": {
+    "remindedForDeadline": false,
+    "firstSeen": "2026-08-05T19:20:32.915Z"
+  },
+  "basecamp:1jvd9ug": {
+    "remindedForDeadline": false,
+    "firstSeen": "2026-08-05T19:20:32.915Z"
+  },
+  "basecamp:17p4v0l": {
+    "remindedForDeadline": false,
+    "firstSeen": "2026-08-05T19:20:32.915Z"
+  },
+  "basecamp:10rm60n": {
+    "remindedForDeadline": false,
+    "firstSeen": "2026-08-05T19:20:32.915Z"
+  },
+  "basecamp:1m38tx2": {
+    "remindedForDeadline": false,
+    "firstSeen": "2026-08-05T19:20:32.915Z"
+  },
+  "basecamp:3dahj": {
+    "remindedForDeadline": false,
+    "firstSeen": "2026-08-05T19:20:32.915Z"
+  },
+  "basecamp:1f1nbwk": {
+    "remindedForDeadline": false,
+    "firstSeen": "2026-08-05T19:20:32.915Z"
+  },
+  "basecamp:19jssyx": {
+    "remindedForDeadline": false,
+    "firstSeen": "2026-08-05T19:20:32.915Z"
+  },
+  "basecamp:16lchh9": {
+    "remindedForDeadline": false,
+    "firstSeen": "2026-08-05T19:20:32.915Z"
+  },
+  "basecamp:1wn4w9d": {
+    "remindedForDeadline": false,
+    "firstSeen": "2026-08-05T19:20:32.915Z"
+  },
+  "basecamp:195eev3": {
+    "remindedForDeadline": false,
+    "firstSeen": "2026-08-05T19:20:32.915Z"
+  },
+  "basecamp:19mw191": {
+    "remindedForDeadline": false,
+    "firstSeen": "2026-08-05T19:20:32.915Z"
+  },
+  "basecamp:6nixpf": {
+    "remindedForDeadline": false,
+    "firstSeen": "2026-08-05T19:20:32.915Z"
+  },
+  "basecamp:1f2i3gn": {
+    "remindedForDeadline": false,
+    "firstSeen": "2026-08-05T19:20:32.915Z"
+  },
+  "search:odsttr": {
+    "remindedForDeadline": false,
+    "firstSeen": "2026-08-05T19:20:32.915Z"
   }
 }
