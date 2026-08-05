@@ -40,12 +40,15 @@ const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 // single event you can apply to, so they'd be permanent noise in the feed.
 const DENY_HOSTS = [
   "reskilll.com", "internshala.com", "youtube.com", "reddit.com", "quora.com",
-  "medium.com", "linkedin.com/pulse", "pinterest.com", "facebook.com",
+  "medium.com", "linkedin.com", "pinterest.com", "facebook.com",
   "hackathons.hackclub.com", "eventbrite.com/d",
   // Firecrawl's past-month filter surfaces a lot of these: reels and roundup
   // pages that talk about an event but give you nothing to apply to.
   "instagram.com", "tiktok.com", "unstop.com/hackathons", "devpost.com/c/",
   "lablab.ai/ai-hackathons", "techcrunch.com",
+  // News/aggregator sites: report ON an event, aren't the event page, and
+  // carry no deadline field, so an old article about a past event never expires.
+  "finance.yahoo.com", "techgig.com", "news.google.com",
 ];
 
 function denied(url) {

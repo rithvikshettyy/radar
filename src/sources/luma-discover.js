@@ -53,7 +53,10 @@ async function sweep(slug, city) {
             tags: slug,
           },
           "luma-discover",
-          { precurated: true }
+          // "ai" category slug is genuinely AI-scoped -> skip the keyword gate.
+          // "tech" is broad enough to include golf days, mixers, etc., so those
+          // still need to earn a spot via config.include like everything else.
+          { precurated: slug === "ai" }
         )
       );
     }
