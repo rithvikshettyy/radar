@@ -55,6 +55,7 @@ Hacker House Goa 2026   ← tappable link   Sarvam Epoch
 | **Devpost** | JSON | Global hackathons. | no |
 | **HackerEarth** | public API | Hackathons + competitive challenges. | no |
 | **Sarvam** | public Sanity dataset | Sarvam Epoch, webinars, hackathons straight from the CMS behind `sarvam.ai/events`. Precurated. | no |
+| **Basecamp** | public Sanity dataset | `basecampblr.com` — Bengaluru's founder/builder week, ~90 sessions, from the CMS behind the site. `Build`-category sessions are precurated; the rest face the keyword gate. | no |
 | **MLH** | scrape | Student hackathon season (current + next). | no |
 | **Web search** | Firecrawl / Brave / DDG | Events that live on no structured feed at all — standalone sites, LinkedIn, X. | optional |
 
@@ -214,7 +215,30 @@ HackCulture and Luma are what you actually rely on.
 
 Search hits aren't precurated, so they face the full keyword + India/remote gate, plus
 a `DENY_HOSTS` list in `websearch.js` that drops listicle/aggregator domains
-(reskilll, internshala, YouTube, Reddit …).
+(reskilll, internshala, YouTube, Reddit …) and press-release wires (PR Newswire,
+Business Wire, GlobeNewswire).
+
+**The article gate.** Most of what a search engine returns for these queries is
+*coverage* of an event, not the event: a press release, a news story, a "top 10
+hackathons in Bengaluru" roundup. Those are the worst noise here because they carry no
+deadline, so `isExpired()` can never retire them — they sit in `seen.json` forever.
+Host denylisting alone is whack-a-mole (every run surfaces a new outlet), so
+`looksLikeArticle()` matches on shape instead:
+
+| Signal | Example |
+|---|---|
+| editorial URL path | `/news/`, `/news-releases/`, `/newsroom/`, `/blog/`, `/story/`, `/2026/08/` |
+| press-release verb in the headline | *KnowBe4 **extends** agent security to…*, *Anthropic **says**…* |
+| roundup framing | *Top 10…*, *Events and Hackathons in Bangalore (April-May 2026)* |
+
+A bare year segment (`hackindia.org/2026/…`) is deliberately *not* an archive path —
+real event sites organize by edition year. In a live run this drops ~7 of 11 hits.
+Every rule is pinned in `selftest.js` against hits that actually reached the chat.
+
+**`"global"` is not an India/remote hint.** It was, and it's the one hint that names
+neither a place nor a delivery mode, so press-release boilerplate ("the *global*
+leader in…") walked a Dubai product launch through an India-only gate. A genuinely
+global online hackathon still passes on `online`/`remote`/`virtual`.
 
 ## Message format
 
@@ -234,6 +258,17 @@ claim they were posted today.
 Dates render in `config.timezone`. Actions runners are UTC, which would otherwise push
 a 9pm IST event onto the previous day.
 
+**Source colours.** Each message opens with a coloured square keyed to its source —
+🟠 Basecamp, 🔵 Devfolio, 🟣 Luma (both the calendar and discovery sweeps), ⚪ everything
+else. Edit `config.sourceColors`; the key is the source name the fetcher passes to
+`normalize()`, and anything unlisted takes `default`.
+
+Telegram gives bots no way to colour *text*: HTML mode allows only
+`b/i/u/s/code/pre/a/blockquote`, and `<tg-emoji>` (real coloured custom emoji) is
+limited to bots that bought a username on Fragment. A coloured square is the only
+colour that renders on every client, for free — hence the square rather than styled
+text.
+
 ## Project layout
 
 ```
@@ -248,8 +283,8 @@ a 9pm IST event onto the previous day.
     ├── telegram.js         # HTML message formatting + sendMessage
     ├── selftest.js         # offline checks
     └── sources/
-        ├── devfolio.js  devpost.js  hackculture.js
-        ├── hackerearth.js  mlh.js  sarvam.js
+        ├── basecamp.js  devfolio.js  devpost.js
+        ├── hackculture.js  hackerearth.js  mlh.js  sarvam.js
         └── luma.js  luma-discover.js  websearch.js
 ```
 

@@ -1,7 +1,7 @@
 // Offline sanity test: no network, no secrets. Validates filter + dedupe + reminder logic.
 import { normalize, idFor, isRelevant, isExpired, deadlineDueSoon } from "./filter.js";
 import { toIso } from "./sources/devfolio.js";
-import { parseDdgHtml } from "./sources/websearch.js";
+import { parseDdgHtml, looksLikeArticle } from "./sources/websearch.js";
 import { parseDevpostRange } from "./sources/devpost.js";
 import { parseSeasonHtml } from "./sources/mlh.js";
 import { formatMessage } from "./telegram.js";
@@ -151,6 +151,74 @@ ok(ddgHits[1].url === "https://example.com/hack", "ddg: uddg-wrapped href unwrap
 ok(ddgHits[0].description === "Two days of AI in Bengaluru.", "ddg: snippet captured");
 ok(parseDdgHtml("<html><body>anomaly detected</body></html>").length === 0, "ddg: block page -> 0 hits");
 
+// Article/roundup gate. Every DROP case below is a hit that actually reached the
+// Telegram chat; every KEEP is a real event page from the same live runs. The
+// search net is majority coverage-not-events, so this is the gate that decides
+// whether the feed is usable — regressions have to fail here, offline.
+const article = (title, url) => looksLikeArticle({ title, url });
+ok(
+  article(
+    "KnowBe4 extends agent security to Anthropic's Claude with agent risk manager | TahawulTech.com",
+    "https://www.tahawultech.com/home-slide/knowbe4-extends-agent-security-to-anthropics-claude-with-agent-risk-manager/"
+  ),
+  "search: press release dropped (verb 'extends')"
+);
+ok(
+  article(
+    "Tech Cloud Business Startup Events and Hackathons in Bangalore (April-May 2026) | Yutori",
+    "https://scouts.yutori.com/x"
+  ),
+  "search: city roundup dropped ('events and hackathons')"
+);
+ok(
+  article("Anthropic says AI models hacked three organisations during testing", "https://telanganatoday.com/x"),
+  "search: news story dropped (verb 'says')"
+);
+ok(
+  article("Tata Bharat YuvAI Hackathon", "https://www.tcs.com/who-we-are/newsroom/news-alert/tata-bharat-yuvai-hackathon"),
+  "search: /newsroom/ path dropped even with a clean title"
+);
+ok(
+  article("Mentoring at India's AI Hardware Buildathon", "https://www.edgeimpulse.com/blog/mentoring-at-ai-hardware-buildathon"),
+  "search: /blog/ path dropped"
+);
+ok(article("Top 10 AI Hackathons in India", "https://x.com/a"), "search: listicle dropped");
+ok(
+  article("Chandigarh University hosts 24-hour National AI Hackathon", "https://www.prnewswire.com/in/news-releases/chandigarh-university"),
+  "search: /news-releases/ path dropped (hyphenated plural, not just /news/)"
+);
+ok(
+  article("Sarvam holding AI event Epoch on July 30", "https://www.indiatoday.in/technology/news/story/sarvam-2957900"),
+  "search: /news/story/ path dropped"
+);
+
+ok(!article("National Road Safety Hackathon 2026", "https://coers.iitm.ac.in/event/national-road-safety-hackathon-2026/"), "search: real event page kept");
+ok(!article("ZeAI Hackathon 2026", "https://www.startupgrantsindia.com/competitions/zeai-hackathon-2026"), "search: /competitions/ kept");
+ok(!article("Hack the Law 2026", "https://hackthelaw-cambridge.com/hackathon-2026/"), "search: standalone event site kept");
+ok(
+  !article("HackIndia Appinventiv AI Hackathon 2026", "https://hackindia.org/2026/hackindia-appinventiv-ai-hackathon-2026/teams/forge"),
+  "search: bare year path is an edition, not a news archive"
+);
+ok(!article("Kaya AI IIT India Hackathon 2026", "https://eventopia.in/event/kaya-ai-iit-india-hackathon-2026"), "search: event listing kept");
+ok(!article("", ""), "search: empty hit doesn't throw");
+
+// "global" was pulled from indiaOrRemoteHints: it named neither a place nor a
+// delivery mode, so press-release boilerplate walked a Dubai launch through the
+// India gate. This is the exact blob that leaked.
+const dubaiPR = normalize(
+  {
+    title: "KnowBe4 extends agent security to Anthropic's Claude",
+    url: "https://x.com/pr",
+    description: "Dubai — KnowBe4, the global leader in managing human risk, today announced AI agents",
+  },
+  "search"
+);
+ok(!isRelevant(dubaiPR), "gate: 'global leader' no longer counts as India/remote");
+ok(
+  isRelevant(normalize({ title: "Global AI Hackathon", url: "https://x.com/g", location: "Online" }, "search")),
+  "gate: a genuinely global event still passes on 'online'"
+);
+
 // Telegram message shape. Broken markup here doesn't fail a run — Telegram just
 // rejects the send (400) or renders tags as literal text — so assert it offline.
 const msgEvent = {
@@ -166,7 +234,7 @@ const msgEvent = {
   ),
 };
 const newMsg = formatMessage(msgEvent, false);
-ok(newMsg.startsWith("🆕 <b>NEW EVENT</b>"), "msg: new-event header");
+ok(newMsg.startsWith("🔵 🆕 <b>NEW EVENT</b>"), "msg: new-event header, devfolio colour tag");
 ok(newMsg.includes('<a href="https://hhgoa.devfolio.co/?a=1">'), "msg: title carries the link");
 ok(newMsg.includes("GenAI &lt;Buildathon&gt; &amp; Demo"), "msg: title html-escaped");
 ok(!newMsg.includes("<Buildathon>"), "msg: no raw angle brackets leak into HTML mode");
@@ -176,8 +244,18 @@ ok(/🗓 Posted .+ \(today\)/.test(newMsg), "msg: posted date with relative day"
 ok(newMsg.includes("🔗 devfolio · hhgoa.devfolio.co"), "msg: source + host footer");
 
 const remindMsg = formatMessage({ ...msgEvent, deadline: inFuture(10) }, true);
-ok(remindMsg.startsWith("⏰ <b>DEADLINE SOON</b> — in 10h"), "msg: reminder header carries the countdown");
+ok(remindMsg.startsWith("🔵 ⏰ <b>DEADLINE SOON</b> — in 10h"), "msg: reminder header carries colour + countdown");
 ok(!/<\/b> · in \d/.test(remindMsg), "msg: reminder doesn't repeat the countdown on the deadline line");
+
+// Per-source colour tags. Telegram can't colour text for bots, so this square is the
+// whole feature — if the map key stops matching the source name it silently greys out.
+const colourOf = (source) => formatMessage({ ...msgEvent, source }, false).slice(0, 2).trim();
+ok(colourOf("basecamp") === "🟠", "msg: basecamp -> orange");
+ok(colourOf("devfolio") === "🔵", "msg: devfolio -> blue");
+ok(colourOf("luma") === "🟣", "msg: luma -> purple");
+ok(colourOf("luma-discover") === "🟣", "msg: luma-discover -> purple too");
+ok(colourOf("mlh") === "⚪", "msg: unmapped source falls back to default");
+ok(!formatMessage({ ...msgEvent, source: "mlh" }, false).includes("undefined"), "msg: no undefined leaks into the header");
 
 // Missing/garbage fields must degrade, not produce "Invalid Date" or empty lines.
 const sparse = formatMessage(normalize({ title: "Bare Event" }, "search"), false);

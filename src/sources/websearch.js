@@ -49,11 +49,50 @@ const DENY_HOSTS = [
   // News/aggregator sites: report ON an event, aren't the event page, and
   // carry no deadline field, so an old article about a past event never expires.
   "finance.yahoo.com", "techgig.com", "news.google.com",
+  "tahawultech.com", "telanganatoday.com", "indiatoday.in", "threads.com",
+  // Press-release wires. Every page is a company announcement by definition, so
+  // there is no shape rule worth writing — deny the host.
+  "prnewswire.com", "businesswire.com", "globenewswire.com",
+  // AI-written "events in <city> this month" roundups — a page of links, never
+  // one thing you can register for.
+  "scouts.yutori.com", "preetbeacon.com",
 ];
 
 function denied(url) {
   const u = url.toLowerCase();
   return DENY_HOSTS.some((h) => u.includes(h));
+}
+
+// A hit can be on a perfectly good host and still be COVERAGE of an event rather
+// than the event: a press release, a news story, a "top 10 hackathons" roundup.
+// Those are the worst kind of noise here because they carry no deadline, so
+// isExpired() can never retire them — they sit in seen.json forever and any URL
+// variation re-alerts them. Host denylisting alone is whack-a-mole (every run
+// surfaces a new outlet), so match on shape instead. Two independent signals:
+
+// 1. URL path segments that only ever carry editorial content. Dated archive paths
+//    (/2026/08/) are here too; a bare year segment (hackindia.org/2026/) is not,
+//    since real event sites organize by edition year.
+const ARTICLE_PATH =
+  /\/(news|news-alerts?|news-releases?|newsroom|press|press-releases?|pressroom|blog|blogs|story|stories|article|articles|insights|opinion|editorial|column|20\d\d\/\d{2})\//i;
+
+// 2. Headline shape. Press-release verbs — the subject is a company doing a thing,
+//    not an event you enter.
+const ARTICLE_TITLE =
+  /\b(launches|launched|announces|announced|unveils|unveiled|extends|extended|acquires|acquired|raises|raised|appoints|appointed|partners with|says|said|reveals|revealed|reports|explained|hits back|responds)\b/i;
+
+// 3. Roundup/listicle framing — a page of links to other events.
+const ROUNDUP_TITLE =
+  /\b(top \d+|best \d+|\d+ best|list of|round-?up|guide to|complete guide|everything you need|events and hackathons|hackathons in [a-z]|upcoming (events|hackathons)|events in [a-z]+ \(?(jan|feb|mar|apr|may|jun|jul|aug|sep|oct|nov|dec))/i;
+
+// Exported for selftest — this is the gate that decides what reaches your chat,
+// and it's tuned against real leaked hits, so regressions must be visible offline.
+export function looksLikeArticle(hit) {
+  const title = hit.title || "";
+  if (ARTICLE_PATH.test(hit.url || "")) return true;
+  if (ARTICLE_TITLE.test(title)) return true;
+  if (ROUNDUP_TITLE.test(title)) return true;
+  return false;
 }
 
 function pickProvider() {
@@ -184,6 +223,7 @@ export async function fetchWebSearch() {
 
   const out = [];
   const seenUrl = new Set();
+  let dropped = 0;
   let first = true;
   for (const q of queries) {
     if (!first) await sleep(gap);
@@ -200,6 +240,10 @@ export async function fetchWebSearch() {
     for (const h of res.hits) {
       if (denied(h.url) || seenUrl.has(h.url)) continue;
       seenUrl.add(h.url);
+      if (looksLikeArticle(h)) {
+        dropped++;
+        continue;
+      }
       out.push(
         normalize(
           { title: h.title, url: h.url, description: h.description, tags: q },
@@ -208,6 +252,9 @@ export async function fetchWebSearch() {
       );
     }
   }
-  console.log(`websearch(${provider}): ${out.length} raw hits from ${queries.length} queries`);
+  console.log(
+    `websearch(${provider}): ${out.length} raw hits from ${queries.length} queries` +
+      ` (${dropped} dropped as article/roundup)`
+  );
   return out;
 }

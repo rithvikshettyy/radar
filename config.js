@@ -20,7 +20,11 @@ export const config = {
     "pune", "chennai", "thane", "goa", "panaji", "kolkata", "ahmedabad",
     "jaipur", "kochi", "chandigarh", "noida", "gurugram", "gurgaon",
     "mohali", "lucknow", "indore", "coimbatore", "bhubaneswar", "nagpur",
-    "online", "remote", "virtual", "global",
+    "online", "remote", "virtual",
+    // NOT "global": it's the one hint that names neither a place nor a delivery
+    // mode, so it matched press-release boilerplate ("the global leader in…") and
+    // walked a Dubai product announcement straight through an India-only gate.
+    // A genuinely global online hackathon still passes on online/remote/virtual.
   ],
 
   // Luma calendars to watch. Open any Luma calendar page, grab its ICS URL
@@ -72,4 +76,22 @@ export const config = {
   // Timezone for dates in Telegram messages. GitHub Actions runners are UTC, so
   // without this a 9pm IST event shows the previous day. Any IANA zone name.
   timezone: "Asia/Kolkata",
+
+  // Per-source colour tag on each Telegram message.
+  //
+  // Telegram gives bots NO way to colour text — HTML mode allows b/i/u/s/code/pre/
+  // a/blockquote and nothing else, and <tg-emoji> (real coloured custom emoji) is
+  // restricted to bots that bought a username on Fragment. A coloured square is
+  // therefore the only colour that actually renders, on every client, for free.
+  // It's prefixed to the header line, so the colour is what you see first in the
+  // chat list preview.
+  //
+  // Key = the source name a fetcher passes to normalize(). Unlisted -> `default`.
+  sourceColors: {
+    basecamp: "🟠",
+    devfolio: "🔵",
+    luma: "🟣",
+    "luma-discover": "🟣",
+    default: "⚪",
+  },
 };

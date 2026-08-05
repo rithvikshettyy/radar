@@ -74,17 +74,26 @@ function host(url) {
   }
 }
 
+// Colour tag for a source. Telegram bots can't colour text (see config.sourceColors),
+// so the colour is an emoji square. Missing/blank entry -> no square, not "undefined".
+function dotFor(source) {
+  const map = config.sourceColors || {};
+  const dot = map[source] ?? map.default ?? "";
+  return dot ? `${dot} ` : "";
+}
+
 function fmt(ev, reminder = false) {
   const dl = ev.deadline ? Date.parse(ev.deadline) : NaN;
   const left = Number.isNaN(dl) ? "" : untilText(dl);
 
   const lines = [];
 
-  // Header: what this alert is, and how urgent.
+  // Header: which source (by colour), what this alert is, and how urgent.
+  const dot = dotFor(ev.source);
   lines.push(
     reminder
-      ? `⏰ <b>DEADLINE SOON</b>${left ? ` — ${left}` : ""}`
-      : "🆕 <b>NEW EVENT</b>"
+      ? `${dot}⏰ <b>DEADLINE SOON</b>${left ? ` — ${left}` : ""}`
+      : `${dot}🆕 <b>NEW EVENT</b>`
   );
   lines.push("");
 

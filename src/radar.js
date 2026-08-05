@@ -7,6 +7,7 @@ import { fetchMLH } from "./sources/mlh.js";
 import { fetchHackerEarth } from "./sources/hackerearth.js";
 import { fetchHackCulture } from "./sources/hackculture.js";
 import { fetchSarvam } from "./sources/sarvam.js";
+import { fetchBasecamp } from "./sources/basecamp.js";
 import { fetchWebSearch } from "./sources/websearch.js";
 import { idFor, isRelevant, isExpired, deadlineDueSoon } from "./filter.js";
 import { push, preview } from "./telegram.js";
@@ -38,6 +39,7 @@ async function main() {
     fetchHackerEarth(),
     fetchHackCulture(),
     fetchSarvam(),
+    fetchBasecamp(),
     fetchWebSearch(),
   ]);
   const all = results.flatMap((r) => (r.status === "fulfilled" ? r.value : []));
