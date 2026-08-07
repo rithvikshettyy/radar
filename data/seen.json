@@ -1599,7 +1599,7 @@
     "firstSeen": "2026-08-04T22:06:30.677Z"
   },
   "luma-discover:1o7eynn": {
-    "remindedForDeadline": false,
+    "remindedForDeadline": true,
     "firstSeen": "2026-08-04T23:58:31.891Z"
   },
   "devpost:11hwzje": {
@@ -1993,5 +1993,21 @@
   "search:1yj7a9q": {
     "remindedForDeadline": false,
     "firstSeen": "2026-08-07T08:50:43.210Z"
+  },
+  "luma-discover:1ig9k4q": {
+    "remindedForDeadline": true,
+    "firstSeen": "2026-08-07T09:54:40.617Z"
+  },
+  "luma-discover:7eypxy": {
+    "remindedForDeadline": false,
+    "firstSeen": "2026-08-07T09:54:40.617Z"
+  },
+  "search:ud49b3": {
+    "remindedForDeadline": false,
+    "firstSeen": "2026-08-07T09:54:40.617Z"
+  },
+  "search:14eogol": {
+    "remindedForDeadline": false,
+    "firstSeen": "2026-08-07T09:54:40.617Z"
   }
 }
