@@ -588,7 +588,7 @@
     "remindedForDeadline": true
   },
   "luma-discover:82c11k": {
-    "remindedForDeadline": false
+    "remindedForDeadline": true
   },
   "luma-discover:1grlpev": {
     "remindedForDeadline": false
@@ -1795,7 +1795,7 @@
     "firstSeen": "2026-08-05T19:20:32.915Z"
   },
   "basecamp:hnq1x7": {
-    "remindedForDeadline": false,
+    "remindedForDeadline": true,
     "firstSeen": "2026-08-05T19:20:32.915Z"
   },
   "basecamp:kjnqhe": {
