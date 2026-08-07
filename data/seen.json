@@ -303,7 +303,7 @@
     "remindedForDeadline": true
   },
   "luma-discover:9lkw5x": {
-    "remindedForDeadline": false
+    "remindedForDeadline": true
   },
   "luma-discover:cjcz80": {
     "remindedForDeadline": false
@@ -2049,5 +2049,77 @@
   "luma-discover:n0ga2m": {
     "remindedForDeadline": false,
     "firstSeen": "2026-08-07T16:45:25.289Z"
+  },
+  "search:1ju4gni": {
+    "remindedForDeadline": false,
+    "firstSeen": "2026-08-07T17:43:19.456Z"
+  },
+  "search:1yv56np": {
+    "remindedForDeadline": false,
+    "firstSeen": "2026-08-07T17:43:19.456Z"
+  },
+  "search:1b5w17e": {
+    "remindedForDeadline": false,
+    "firstSeen": "2026-08-07T17:43:19.456Z"
+  },
+  "search:1kxfvgf": {
+    "remindedForDeadline": false,
+    "firstSeen": "2026-08-07T17:43:19.456Z"
+  },
+  "search:1odnxhd": {
+    "remindedForDeadline": false,
+    "firstSeen": "2026-08-07T17:43:19.456Z"
+  },
+  "search:1isk9u7": {
+    "remindedForDeadline": false,
+    "firstSeen": "2026-08-07T17:43:19.456Z"
+  },
+  "search:ogjjiu": {
+    "remindedForDeadline": false,
+    "firstSeen": "2026-08-07T17:43:19.456Z"
+  },
+  "search:12g0zgq": {
+    "remindedForDeadline": false,
+    "firstSeen": "2026-08-07T17:43:19.456Z"
+  },
+  "search:1qy92bo": {
+    "remindedForDeadline": false,
+    "firstSeen": "2026-08-07T17:43:19.456Z"
+  },
+  "search:wbotrq": {
+    "remindedForDeadline": false,
+    "firstSeen": "2026-08-07T17:43:19.456Z"
+  },
+  "search:1j0v1qc": {
+    "remindedForDeadline": false,
+    "firstSeen": "2026-08-07T17:43:19.456Z"
+  },
+  "search:1utjvtg": {
+    "remindedForDeadline": false,
+    "firstSeen": "2026-08-07T17:43:19.456Z"
+  },
+  "search:1iabbr7": {
+    "remindedForDeadline": false,
+    "firstSeen": "2026-08-07T17:43:19.456Z"
+  },
+  "search:1lf7n3a": {
+    "remindedForDeadline": false,
+    "firstSeen": "2026-08-07T17:43:19.456Z"
+  },
+  "search:1p0wma9": {
+    "remindedForDeadline": false,
+    "firstSeen": "2026-08-07T17:43:19.456Z"
+  },
+  "search:vkcvg7": {
+    "remindedForDeadline": false,
+    "firstSeen": "2026-08-07T17:43:19.456Z"
+  },
+  "search:i674bd": {
+    "remindedForDeadline": false,
+    "firstSeen": "2026-08-07T17:43:19.456Z"
+  },
+  "search:1o59ime": {
+    "remindedForDeadline": false,
+    "firstSeen": "2026-08-07T17:43:19.456Z"
   }
 }
