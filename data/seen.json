@@ -2217,5 +2217,9 @@
   "search:ftw4xw": {
     "remindedForDeadline": false,
     "firstSeen": "2026-08-08T09:31:12.351Z"
+  },
+  "luma-discover:1eddpkg": {
+    "remindedForDeadline": true,
+    "firstSeen": "2026-08-08T10:24:14.839Z"
   }
 }
