@@ -1879,7 +1879,7 @@
     "firstSeen": "2026-08-05T21:01:02.771Z"
   },
   "luma-discover:b4pigw": {
-    "remindedForDeadline": false,
+    "remindedForDeadline": true,
     "firstSeen": "2026-08-05T22:52:15.358Z"
   },
   "search:1vidibv": {
