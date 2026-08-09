@@ -717,7 +717,7 @@
     "remindedForDeadline": true
   },
   "luma-discover:1gu0dgh": {
-    "remindedForDeadline": false
+    "remindedForDeadline": true
   },
   "luma-discover:5gdr98": {
     "remindedForDeadline": false
@@ -1335,7 +1335,7 @@
     "firstSeen": "2026-08-03T18:45:24.728Z"
   },
   "luma-discover:1m38tx2": {
-    "remindedForDeadline": false,
+    "remindedForDeadline": true,
     "firstSeen": "2026-08-03T18:45:24.728Z"
   },
   "luma-discover:qw481o": {
@@ -1819,7 +1819,7 @@
     "firstSeen": "2026-08-05T19:20:32.915Z"
   },
   "basecamp:1m38tx2": {
-    "remindedForDeadline": false,
+    "remindedForDeadline": true,
     "firstSeen": "2026-08-05T19:20:32.915Z"
   },
   "basecamp:3dahj": {
@@ -2281,5 +2281,9 @@
   "search:wk1mwi": {
     "remindedForDeadline": false,
     "firstSeen": "2026-08-09T05:47:27.902Z"
+  },
+  "search:1iax14z": {
+    "remindedForDeadline": false,
+    "firstSeen": "2026-08-09T08:34:20.518Z"
   }
 }
