@@ -1231,7 +1231,7 @@
     "firstSeen": "2026-08-03T06:14:23.883Z"
   },
   "luma-discover:1555hgn": {
-    "remindedForDeadline": false,
+    "remindedForDeadline": true,
     "firstSeen": "2026-08-03T06:14:23.883Z"
   },
   "devfolio:10cfg8b": {
@@ -2477,5 +2477,9 @@
   "luma-discover:1jm196g": {
     "remindedForDeadline": false,
     "firstSeen": "2026-08-11T11:39:12.947Z"
+  },
+  "luma-discover:ndm3lr": {
+    "remindedForDeadline": false,
+    "firstSeen": "2026-08-11T12:48:22.239Z"
   }
 }
