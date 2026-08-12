@@ -2561,5 +2561,13 @@
   "luma-discover:4g42hw": {
     "remindedForDeadline": false,
     "firstSeen": "2026-08-12T11:42:59.943Z"
+  },
+  "luma-discover:1g06xhg": {
+    "remindedForDeadline": true,
+    "firstSeen": "2026-08-12T12:53:24.834Z"
+  },
+  "search:qdj7hx": {
+    "remindedForDeadline": false,
+    "firstSeen": "2026-08-12T12:53:24.834Z"
   }
 }
