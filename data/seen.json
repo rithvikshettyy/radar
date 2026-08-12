@@ -2585,5 +2585,9 @@
   "luma-discover:1pvj89v": {
     "remindedForDeadline": false,
     "firstSeen": "2026-08-12T16:51:41.197Z"
+  },
+  "luma-discover:zk48vn": {
+    "remindedForDeadline": true,
+    "firstSeen": "2026-08-12T18:53:24.606Z"
   }
 }
