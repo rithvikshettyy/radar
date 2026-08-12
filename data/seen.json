@@ -2517,5 +2517,17 @@
   "search:11tzx62": {
     "remindedForDeadline": false,
     "firstSeen": "2026-08-11T22:35:08.728Z"
+  },
+  "devpost:lsgtnc": {
+    "remindedForDeadline": true,
+    "firstSeen": "2026-08-12T06:09:10.470Z"
+  },
+  "luma-discover:1njrr62": {
+    "remindedForDeadline": false,
+    "firstSeen": "2026-08-12T06:09:10.470Z"
+  },
+  "luma-discover:w7j9cn": {
+    "remindedForDeadline": false,
+    "firstSeen": "2026-08-12T06:09:10.470Z"
   }
 }
