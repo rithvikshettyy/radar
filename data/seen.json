@@ -2363,7 +2363,7 @@
     "firstSeen": "2026-08-10T11:02:05.846Z"
   },
   "luma-discover:184qf6m": {
-    "remindedForDeadline": false,
+    "remindedForDeadline": true,
     "firstSeen": "2026-08-10T11:02:05.846Z"
   },
   "search:e58nj": {
@@ -2621,5 +2621,9 @@
   "luma-discover:1m8y7fk": {
     "remindedForDeadline": false,
     "firstSeen": "2026-08-13T11:52:28.354Z"
+  },
+  "luma-discover:1ou6ffp": {
+    "remindedForDeadline": true,
+    "firstSeen": "2026-08-13T12:55:00.252Z"
   }
 }
