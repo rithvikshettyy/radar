@@ -591,7 +591,7 @@
     "remindedForDeadline": true
   },
   "luma-discover:1grlpev": {
-    "remindedForDeadline": false
+    "remindedForDeadline": true
   },
   "luma-discover:186d0ss": {
     "remindedForDeadline": false
@@ -2613,5 +2613,9 @@
   "search:1q2t7ae": {
     "remindedForDeadline": false,
     "firstSeen": "2026-08-13T08:14:51.670Z"
+  },
+  "luma-discover:azbe5b": {
+    "remindedForDeadline": false,
+    "firstSeen": "2026-08-13T10:59:42.792Z"
   }
 }
