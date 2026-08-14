@@ -2239,7 +2239,7 @@
     "firstSeen": "2026-08-08T15:23:14.741Z"
   },
   "devpost:18soicm": {
-    "remindedForDeadline": false,
+    "remindedForDeadline": true,
     "firstSeen": "2026-08-08T16:25:05.821Z"
   },
   "search:130h8sg": {
@@ -2423,7 +2423,7 @@
     "firstSeen": "2026-08-10T18:46:44.672Z"
   },
   "devpost:1mucro8": {
-    "remindedForDeadline": false,
+    "remindedForDeadline": true,
     "firstSeen": "2026-08-10T19:51:12.481Z"
   },
   "luma-discover:1g7pdbd": {
@@ -2645,5 +2645,9 @@
   "search:ksc37z": {
     "remindedForDeadline": false,
     "firstSeen": "2026-08-13T20:35:17.125Z"
+  },
+  "search:1h1ldy9": {
+    "remindedForDeadline": false,
+    "firstSeen": "2026-08-14T01:20:21.130Z"
   }
 }
