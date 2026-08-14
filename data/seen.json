@@ -2685,5 +2685,13 @@
   "luma-discover:1lakavg": {
     "remindedForDeadline": false,
     "firstSeen": "2026-08-14T11:39:34.213Z"
+  },
+  "luma-discover:hpi353": {
+    "remindedForDeadline": false,
+    "firstSeen": "2026-08-14T12:50:12.109Z"
+  },
+  "luma-discover:9cnf7v": {
+    "remindedForDeadline": false,
+    "firstSeen": "2026-08-14T12:50:12.109Z"
   }
 }
