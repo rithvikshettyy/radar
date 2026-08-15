@@ -2757,5 +2757,21 @@
   "luma-discover:sfemw4": {
     "remindedForDeadline": false,
     "firstSeen": "2026-08-15T12:23:45.736Z"
+  },
+  "luma-discover:1w32om0": {
+    "remindedForDeadline": false,
+    "firstSeen": "2026-08-15T18:19:04.291Z"
+  },
+  "luma-discover:t7lt83": {
+    "remindedForDeadline": true,
+    "firstSeen": "2026-08-15T18:19:04.291Z"
+  },
+  "search:100hahn": {
+    "remindedForDeadline": false,
+    "firstSeen": "2026-08-15T18:19:04.291Z"
+  },
+  "search:1mi72ew": {
+    "remindedForDeadline": false,
+    "firstSeen": "2026-08-15T18:19:04.291Z"
   }
 }
