@@ -2861,5 +2861,13 @@
   "search:190f90i": {
     "remindedForDeadline": false,
     "firstSeen": "2026-08-17T04:34:26.526Z"
+  },
+  "luma-discover:jxtudo": {
+    "remindedForDeadline": true,
+    "firstSeen": "2026-08-17T06:39:47.504Z"
+  },
+  "luma-discover:1608z89": {
+    "remindedForDeadline": false,
+    "firstSeen": "2026-08-17T06:39:47.504Z"
   }
 }
