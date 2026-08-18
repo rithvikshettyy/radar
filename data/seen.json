@@ -2679,7 +2679,7 @@
     "firstSeen": "2026-08-14T08:09:14.461Z"
   },
   "sarvam:9omcv3": {
-    "remindedForDeadline": false,
+    "remindedForDeadline": true,
     "firstSeen": "2026-08-14T09:54:11.193Z"
   },
   "luma-discover:1lakavg": {
@@ -2965,5 +2965,17 @@
   "luma-discover:rc96mc": {
     "remindedForDeadline": false,
     "firstSeen": "2026-08-18T09:25:21.218Z"
+  },
+  "luma-discover:1s7jykr": {
+    "remindedForDeadline": false,
+    "firstSeen": "2026-08-18T11:19:47.773Z"
+  },
+  "luma-discover:14ejazb": {
+    "remindedForDeadline": false,
+    "firstSeen": "2026-08-18T11:19:47.773Z"
+  },
+  "luma-discover:4v6nov": {
+    "remindedForDeadline": false,
+    "firstSeen": "2026-08-18T11:19:47.773Z"
   }
 }
