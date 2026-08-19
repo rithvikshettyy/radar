@@ -2719,7 +2719,7 @@
     "firstSeen": "2026-08-14T17:46:56.514Z"
   },
   "devfolio:xdlguy": {
-    "remindedForDeadline": false,
+    "remindedForDeadline": true,
     "firstSeen": "2026-08-14T18:43:50.965Z"
   },
   "devfolio:vw5slm": {
@@ -3069,5 +3069,9 @@
   "luma-discover:1hs5j5t": {
     "remindedForDeadline": false,
     "firstSeen": "2026-08-19T18:24:16.945Z"
+  },
+  "hackerearth:11n8ed": {
+    "remindedForDeadline": false,
+    "firstSeen": "2026-08-19T19:19:54.939Z"
   }
 }
