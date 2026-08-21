@@ -642,7 +642,7 @@
     "remindedForDeadline": true
   },
   "devfolio:zby064": {
-    "remindedForDeadline": false
+    "remindedForDeadline": true
   },
   "devfolio:1tkc94z": {
     "remindedForDeadline": false
@@ -3289,5 +3289,21 @@
   "search:1fr71i4": {
     "remindedForDeadline": false,
     "firstSeen": "2026-08-21T18:26:53.837Z"
+  },
+  "luma-discover:1o0woyu": {
+    "remindedForDeadline": false,
+    "firstSeen": "2026-08-21T19:21:09.171Z"
+  },
+  "luma-discover:1ebm5t6": {
+    "remindedForDeadline": false,
+    "firstSeen": "2026-08-21T19:21:09.171Z"
+  },
+  "search:bznw9m": {
+    "remindedForDeadline": false,
+    "firstSeen": "2026-08-21T19:21:09.171Z"
+  },
+  "search:1e65srq": {
+    "remindedForDeadline": false,
+    "firstSeen": "2026-08-21T19:21:09.171Z"
   }
 }
