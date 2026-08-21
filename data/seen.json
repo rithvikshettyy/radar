@@ -3261,5 +3261,13 @@
   "search:ubrpn3": {
     "remindedForDeadline": false,
     "firstSeen": "2026-08-21T12:33:01.376Z"
+  },
+  "luma-discover:18ki952": {
+    "remindedForDeadline": true,
+    "firstSeen": "2026-08-21T14:27:44.012Z"
+  },
+  "search:1bwgxdu": {
+    "remindedForDeadline": false,
+    "firstSeen": "2026-08-21T14:27:44.012Z"
   }
 }
