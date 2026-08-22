@@ -3311,7 +3311,7 @@
     "firstSeen": "2026-08-22T02:12:25.922Z"
   },
   "luma-discover:avloek": {
-    "remindedForDeadline": false,
+    "remindedForDeadline": true,
     "firstSeen": "2026-08-22T03:36:29.862Z"
   },
   "search:11061iy": {
