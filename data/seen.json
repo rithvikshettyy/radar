@@ -3329,5 +3329,9 @@
   "search:1k3k278": {
     "remindedForDeadline": false,
     "firstSeen": "2026-08-22T05:20:59.242Z"
+  },
+  "luma-discover:rtxyep": {
+    "remindedForDeadline": true,
+    "firstSeen": "2026-08-22T06:28:00.834Z"
   }
 }
