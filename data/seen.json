@@ -3305,5 +3305,9 @@
   "search:1e65srq": {
     "remindedForDeadline": false,
     "firstSeen": "2026-08-21T19:21:09.171Z"
+  },
+  "luma-discover:zrhpne": {
+    "remindedForDeadline": true,
+    "firstSeen": "2026-08-22T02:12:25.922Z"
   }
 }
