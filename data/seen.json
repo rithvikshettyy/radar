@@ -3027,7 +3027,7 @@
     "firstSeen": "2026-08-19T04:30:32.624Z"
   },
   "luma-discover:15q8vff": {
-    "remindedForDeadline": false,
+    "remindedForDeadline": true,
     "firstSeen": "2026-08-19T05:23:12.186Z"
   },
   "search:s007ay": {
