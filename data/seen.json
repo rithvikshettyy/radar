@@ -3521,5 +3521,9 @@
   "luma-discover:ltrihm": {
     "remindedForDeadline": false,
     "firstSeen": "2026-08-24T13:44:48.185Z"
+  },
+  "luma-discover:ep5s5f": {
+    "remindedForDeadline": true,
+    "firstSeen": "2026-08-24T14:35:13.106Z"
   }
 }
