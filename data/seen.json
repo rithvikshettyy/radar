@@ -2791,7 +2791,7 @@
     "firstSeen": "2026-08-15T19:16:59.421Z"
   },
   "devfolio:v69fuz": {
-    "remindedForDeadline": false,
+    "remindedForDeadline": true,
     "firstSeen": "2026-08-15T21:14:25.391Z"
   },
   "devfolio:uuwqzx": {
@@ -3565,5 +3565,9 @@
   "luma-discover:nbkbk": {
     "remindedForDeadline": false,
     "firstSeen": "2026-08-25T06:35:21.065Z"
+  },
+  "luma-discover:1acx5j1": {
+    "remindedForDeadline": false,
+    "firstSeen": "2026-08-25T07:38:53.101Z"
   }
 }
