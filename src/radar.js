@@ -48,9 +48,20 @@ async function main() {
   // Luma calendars overlap). Without this the second copy sees the state the first
   // copy just wrote and fires a deadline reminder seconds after the NEW alert.
   const byId = new Map();
+  let expiredCount = 0;
   const live = all
     .map((e) => ({ ...e, id: idFor(e) }))
-    .filter((e) => isRelevant(e) && !isExpired(e));
+    .filter((e) => {
+      if (!isRelevant(e)) return false;
+      // Counted, not just dropped: this gate is what stops finished events being
+      // alerted weeks late, and a silent filter gives you no way to tell whether
+      // it's working or has quietly started eating everything.
+      if (isExpired(e)) {
+        expiredCount++;
+        return false;
+      }
+      return true;
+    });
   for (const e of live) {
     const prev = byId.get(e.id);
     // Prefer the copy that carries a deadline; feeds differ in what they fill in.
@@ -97,8 +108,8 @@ async function main() {
 
   await writeFile(SEEN_PATH, JSON.stringify(seen, null, 2));
   console.log(
-    `scanned=${all.length} relevant=${events.length} new=${newCount} ` +
-      `reminders=${remindCount} sent=${sentCount} dry=${DRY} seed=${SEED}`
+    `scanned=${all.length} relevant=${events.length} expired=${expiredCount} ` +
+      `new=${newCount} reminders=${remindCount} sent=${sentCount} dry=${DRY} seed=${SEED}`
   );
 }
 

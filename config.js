@@ -8,9 +8,14 @@ export const config = {
     "agent", "hackathon", "buildathon", "devpost", "sarvam",
     "openai", "anthropic", "claude", "gemini", "llama", "rag",
   ],
-  // Keep noise out.
+  // Keep noise out. Matched whole-word against title + location + description +
+  // tags, so plurals need their own entry ("bootcamp" does NOT match "bootcamps").
   exclude: [
     "high school", "class 9", "class 10", "class 11", "class 12", "school students",
+    // Paid training dressed up as an event — a course you buy, not a thing you enter.
+    "bootcamp", "bootcamps", "boot camp", "boot camps", "masterclass", "crash course",
+    // Not the domain you're building in.
+    "fashion", "fashion week", "fashion show",
   ],
   // Only surface events that are India-based OR online/remote.
   // Set to false to get everything that matches keywords.
@@ -62,12 +67,29 @@ export const config = {
   // hackculture, luma) are what you actually rely on.
   webSearch: { provider: "auto" },
 
+  // {year} / {nextYear} expand at run time. Hard-coding "2026" here quietly rots:
+  // come January the radar keeps asking for last year's events and then alerts you
+  // to pages about hackathons that already finished.
   searchQueries: [
-    "AI hackathon India 2026 apply",
-    "hacker house India 2026",
-    "Sarvam Epoch 2026",
-    "AI buildathon Bengaluru 2026 register",
-    "Anthropic Claude hackathon India 2026",
+    "AI hackathon India {year} apply",
+    "hacker house India {year}",
+    "Sarvam Epoch {year}",
+    "AI buildathon Bengaluru {year} register",
+    "Anthropic Claude hackathon India {year}",
+    "AI hackathon India {nextYear} registration open",
+  ],
+
+  // Extra hosts the web-search net must never surface, on top of the built-in list
+  // in src/sources/websearch.js. Matched on hostname (subdomains included); add a
+  // path to narrow it, e.g. "example.com/blog".
+  denyHosts: [
+    // Social posts: a tweet is an announcement, never a page you can apply on, and
+    // it carries no date the expiry check can read — so it lingers for months.
+    "x.com", "twitter.com", "t.co", "bsky.app", "mastodon.social",
+    // Developer-blog platforms: write-ups ABOUT hackathons, not the hackathons.
+    "dev.to", "hashnode.dev", "substack.com", "wordpress.com", "blogspot.com",
+    // Content/SEO sites that rank for event queries with nothing to register for.
+    "incorpx.io",
   ],
 
   // Re-alert this many hours before a deadline/start you've already seen once.

@@ -7,7 +7,8 @@
     "start": "node src/radar.js",
     "dry": "node src/radar.js --dry",
     "seed": "node src/radar.js --seed",
-    "selftest": "node src/selftest.js"
+    "selftest": "node src/selftest.js",
+    "chatid": "node src/chatid.js"
   },
   "dependencies": {
     "cheerio": "^1.0.0",

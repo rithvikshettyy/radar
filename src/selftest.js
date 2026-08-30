@@ -1,10 +1,10 @@
 // Offline sanity test: no network, no secrets. Validates filter + dedupe + reminder logic.
-import { normalize, idFor, isRelevant, isExpired, deadlineDueSoon } from "./filter.js";
+import { normalize, idFor, isRelevant, isExpired, deadlineDueSoon, extractLatestDate } from "./filter.js";
 import { toIso } from "./sources/devfolio.js";
-import { parseDdgHtml, looksLikeArticle } from "./sources/websearch.js";
+import { parseDdgHtml, looksLikeArticle, expandQuery, denied } from "./sources/websearch.js";
 import { parseDevpostRange } from "./sources/devpost.js";
 import { parseSeasonHtml } from "./sources/mlh.js";
-import { formatMessage } from "./telegram.js";
+import { formatMessage, parseTargets } from "./telegram.js";
 
 let fail = 0;
 const ok = (cond, msg) => {
@@ -239,7 +239,9 @@ ok(newMsg.includes('<a href="https://hhgoa.devfolio.co/?a=1">'), "msg: title car
 ok(newMsg.includes("GenAI &lt;Buildathon&gt; &amp; Demo"), "msg: title html-escaped");
 ok(!newMsg.includes("<Buildathon>"), "msg: no raw angle brackets leak into HTML mode");
 ok(newMsg.includes("📍 Bengaluru, India"), "msg: location line");
-ok(/⏳ <b>[A-Z][a-z]{2}, \d{1,2} [A-Z][a-z]{2} \d{4}, \d{2}:\d{2}<\/b> · in 3 days/.test(newMsg), "msg: deadline + countdown");
+// {2,3} on the month, not {2}: ICU abbreviates September as "Sept", so pinning it to
+// three letters made this fail for three days every August.
+ok(/⏳ <b>[A-Z][a-z]{2}, \d{1,2} [A-Z][a-z]{2,3} \d{4}, \d{2}:\d{2}<\/b> · in 3 days/.test(newMsg), "msg: deadline + countdown");
 ok(/🗓 Posted .+ \(today\)/.test(newMsg), "msg: posted date with relative day");
 ok(newMsg.includes("🔗 devfolio · hhgoa.devfolio.co"), "msg: source + host footer");
 
@@ -264,6 +266,113 @@ ok(!sparse.includes("📍") && !sparse.includes("⏳") && !sparse.includes("🗓
 ok(sparse.includes("<b>Bare Event</b>") && !sparse.includes("<a href"), "msg: no url -> plain bold title");
 ok(formatMessage({ ...msgEvent, deadline: "sometime in spring" }, false).includes("⏳ <b>sometime in spring</b>"), "msg: unparseable date shown raw");
 ok(formatMessage({ ...msgEvent, title: "" }, false).includes("(untitled)"), "msg: empty title placeholder");
+
+// ---------------------------------------------------------------------------
+// Finished / expired events. A web-search hit carries no deadline field, so for a
+// long time NOTHING could retire one — a page about a hackathon that ended in May
+// still arrived as a "NEW EVENT" in August. isExpired() now reads the dates out of
+// the event's own text when there's no deadline, so these are the regression tests
+// for "don't tell me about things that are already over".
+// ---------------------------------------------------------------------------
+const YEAR = new Date().getUTCFullYear();
+const iso = (ms) => (ms == null ? null : new Date(ms).toISOString());
+
+ok(iso(extractLatestDate("AI Hackathon 2019")) === "2019-12-31T23:59:59.000Z", "date: bare year -> end of that year");
+ok(iso(extractLatestDate("Demo Day 12 Aug 2026")) === "2026-08-12T23:59:59.000Z", "date: '12 Aug 2026'");
+ok(iso(extractLatestDate("Demo Day Aug 12, 2026")) === "2026-08-12T23:59:59.000Z", "date: 'Aug 12, 2026'");
+ok(iso(extractLatestDate("Sept 5th, 2026 demo")) === "2026-09-05T23:59:59.000Z", "date: 'Sept 5th, 2026'");
+ok(iso(extractLatestDate("starts 2026-08-12")) === "2026-08-12T23:59:59.000Z", "date: ISO form");
+ok(iso(extractLatestDate("Epoch, August 2026")) === "2026-08-31T23:59:59.000Z", "date: month+year -> end of month");
+ok(extractLatestDate("Hacker House Goa") === null, "date: no date named -> null");
+// Precision tiers must not mix: a full date next to a stray year kept the event
+// alive until December, four months after it finished.
+ok(
+  iso(extractLatestDate("Held 12 Aug 2026 · © 2026 Acme")) === "2026-08-12T23:59:59.000Z",
+  "date: a full date beats a loose year in the same text"
+);
+// The loose month regex read "Marathon 2026" as March 2026 and expired live events.
+ok(iso(extractLatestDate("AI Marathon 2026")) === "2026-12-31T23:59:59.000Z", "date: 'Marathon' is not March");
+// The exact leak the user reported: a months-old tweet whose id contains "2084".
+ok(
+  extractLatestDate("https://x.com/SarvamAI/status/2084578727158317435") === null,
+  "date: a tweet id is not the year 2084"
+);
+ok(extractLatestDate("") === null && extractLatestDate(null) === null, "date: empty input -> null");
+
+const undatedSearchHit = normalize({ title: "Some AI Hackathon", url: "https://e.org/h" }, "search");
+const lastYearHit = normalize({ title: `AI Hackathon ${YEAR - 1}`, url: "https://e.org/h" }, "search");
+const nextYearHit = normalize({ title: `AI Hackathon ${YEAR + 1}`, url: "https://e.org/h" }, "search");
+ok(isExpired(lastYearHit), "expired: last year's edition is finished, even with no deadline field");
+ok(!isExpired(nextYearHit), "expired: next year's edition is not");
+ok(!isExpired(undatedSearchHit), "expired: a hit naming no date at all is kept — nothing to check");
+// tags is the SEARCH QUERY, which carries the current year. Reading it would stamp
+// "this year" onto every hit and make the check above pass unconditionally.
+const staleHitFreshQuery = normalize(
+  { title: `AI Hackathon ${YEAR - 1}`, url: "https://e.org/h", tags: `AI hackathon India ${YEAR} apply` },
+  "search"
+);
+ok(isExpired(staleHitFreshQuery), "expired: the query's own year doesn't rescue a stale hit");
+// A real deadline always wins over prose: a page can name last year and still be live.
+ok(
+  !isExpired({ deadline: inFuture(48), dateText: `Since ${YEAR - 2}, the AI Hackathon` }),
+  "expired: a live deadline outranks an old year in the text"
+);
+
+// Coverage of a FINISHED event — the other half of "don't alert me weeks later".
+ok(looksLikeArticle({ title: "AI Hackathon 2026 Recap", url: "https://e.org/x" }), "search: recap dropped");
+ok(looksLikeArticle({ title: "Winners announced for GenAI Buildathon", url: "https://e.org/x" }), "search: winners write-up dropped");
+ok(looksLikeArticle({ title: "Sarvam Epoch concludes in Bengaluru", url: "https://e.org/x" }), "search: 'concludes' dropped");
+ok(looksLikeArticle({ title: "How we built our hackathon project", url: "https://e.org/x" }), "search: personal write-up dropped");
+ok(looksLikeArticle({ title: "AI Buildathon kicks off today", url: "https://e.org/x" }), "search: 'kicks off' coverage dropped");
+ok(
+  looksLikeArticle({ title: "GenAI Hackathon", url: "https://e.org/x", description: "Registrations are now closed." }),
+  "search: closed window caught in the snippet, not just the title"
+);
+// …without eating live event pages that merely mention prizes or winners.
+ok(!looksLikeArticle({ title: "AI Hackathon 2026 — ₹5L prizes for winners", url: "https://e.org/x" }), "search: a prize line is not a recap");
+ok(!looksLikeArticle({ title: "Hacker House Goa 2026", url: "https://hhgoa.devfolio.co" }), "search: real event page still kept");
+
+// Host denylisting. This must match the HOSTNAME: a substring check on the whole
+// URL turns a short entry like "x.com" into a blackhole for phoenix.com/matrix.com.
+ok(denied("https://x.com/SarvamAI/status/2084578727158317435"), "deny: x.com (the reported leak)");
+ok(denied("https://twitter.com/SarvamAI/status/1"), "deny: twitter.com");
+ok(denied("https://dev.to/someone/my-hackathon-writeup"), "deny: dev.to");
+ok(denied("https://incorpx.io/events/ai"), "deny: incorpx.io");
+ok(denied("https://www.linkedin.com/posts/x"), "deny: www. prefix ignored");
+ok(denied("https://blog.medium.com/x"), "deny: subdomain of a denied host");
+ok(!denied("https://phoenix.com/hackathon"), "deny: 'x.com' must not swallow phoenix.com");
+ok(!denied("https://matrix.com/hack"), "deny: nor matrix.com");
+ok(!denied("https://hhgoa.devfolio.co"), "deny: a real event host passes");
+// Path-scoped entries deny part of a site, not the whole thing.
+ok(denied("https://devpost.com/c/ai"), "deny: path-scoped entry (devpost.com/c/)");
+ok(!denied("https://devpost.com/software/thing"), "deny: rest of that host still allowed");
+ok(denied("not a url"), "deny: unparseable url rejected, nothing to link to anyway");
+
+// Bootcamps / fashion, per config.exclude. Plurals need their own entry because the
+// keyword match is whole-word.
+const excluded = (title) => !isRelevant(normalize({ title, location: "Online" }, "search"));
+ok(excluded("AI bootcamp for beginners"), "exclude: bootcamp");
+ok(excluded("Generative AI bootcamps in Bengaluru"), "exclude: bootcamps (plural)");
+ok(excluded("AI boot camp Mumbai"), "exclude: 'boot camp' spelled apart");
+ok(excluded("AI in fashion hackathon"), "exclude: fashion");
+ok(excluded("Fashion Week tech showcase Mumbai"), "exclude: fashion week");
+ok(isRelevant(normalize({ title: "AI Hackathon", location: "Online" }, "search")), "exclude: a plain AI hackathon still passes");
+
+// Search queries follow the calendar. Hard-coding "2026" meant that come January the
+// radar kept asking for last year's events — and then alerted on what it found.
+ok(expandQuery("AI hackathon India {year} apply") === `AI hackathon India ${YEAR} apply`, "query: {year} expands");
+ok(expandQuery("hackathon {nextYear}") === `hackathon ${YEAR + 1}`, "query: {nextYear} expands");
+ok(expandQuery("plain query") === "plain query", "query: no placeholder -> unchanged");
+
+// Telegram targets: one env var, several chats, so a group gets the same feed.
+ok(parseTargets("123").length === 1, "targets: single id");
+ok(parseTargets("123, -1001234567890")[1].chatId === "-1001234567890", "targets: comma-separated group id");
+ok(parseTargets("123 -1001234567890").length === 2, "targets: space-separated too");
+ok(parseTargets("-1001234567890:42")[0].topicId === 42, "targets: forum topic split off");
+ok(parseTargets("-1001234567890:42")[0].chatId === "-1001234567890", "targets: the minus stays with the chat id");
+ok(parseTargets("-1001234567890")[0].topicId === null, "targets: no topic -> null, not NaN");
+ok(parseTargets("@mychannel")[0].chatId === "@mychannel", "targets: @username kept whole");
+ok(parseTargets("").length === 0 && parseTargets(undefined).length === 0, "targets: unset -> empty, stays dry");
 
 console.log(fail ? `\n${fail} FAILED` : "\nALL PASS");
 process.exit(fail ? 1 : 0);

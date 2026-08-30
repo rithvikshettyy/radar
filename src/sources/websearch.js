@@ -58,9 +58,35 @@ const DENY_HOSTS = [
   "scouts.yutori.com", "preetbeacon.com",
 ];
 
-function denied(url) {
-  const u = url.toLowerCase();
-  return DENY_HOSTS.some((h) => u.includes(h));
+// Built-in list plus whatever config.denyHosts adds, so tuning the feed never means
+// editing a source file.
+const ALL_DENY = [...DENY_HOSTS, ...(config.denyHosts || [])].map((s) =>
+  String(s).toLowerCase().replace(/^https?:\/\//, "").replace(/^www\./, "")
+);
+
+// Match on the parsed HOSTNAME, not a substring of the whole URL. Substring
+// matching is quietly wrong the moment a short entry is added: "x.com" appears
+// inside phoenix.com, matrix.com and devpost.com/x.com-anything, so the naive
+// check would blackhole unrelated hosts. An entry may carry a path prefix
+// ("eventbrite.com/d") to deny only part of a site.
+// Exported for selftest: getting this wrong either floods the feed or silently
+// blackholes good hosts, and neither shows up until it's already happened.
+export function denied(url) {
+  let host, path;
+  try {
+    const u = new URL(url);
+    host = u.host.toLowerCase().replace(/^www\./, "");
+    path = u.pathname.toLowerCase();
+  } catch {
+    return true; // not a usable link, so nothing to alert on either way
+  }
+  return ALL_DENY.some((entry) => {
+    const slash = entry.indexOf("/");
+    const h = slash === -1 ? entry : entry.slice(0, slash);
+    const p = slash === -1 ? "" : entry.slice(slash);
+    if (host !== h && !host.endsWith(`.${h}`)) return false;
+    return !p || path.startsWith(p);
+  });
 }
 
 // A hit can be on a perfectly good host and still be COVERAGE of an event rather
@@ -85,13 +111,31 @@ const ARTICLE_TITLE =
 const ROUNDUP_TITLE =
   /\b(top \d+|best \d+|\d+ best|list of|round-?up|guide to|complete guide|everything you need|events and hackathons|hackathons in [a-z]|upcoming (events|hackathons)|events in [a-z]+ \(?(jan|feb|mar|apr|may|jun|jul|aug|sep|oct|nov|dec))/i;
 
+// 4. Write-ups ABOUT an event that already happened. These are why an alert can
+//    arrive weeks after the thing ended: a recap carries no deadline, so nothing
+//    downstream can retire it. Past tense in the headline is the tell.
+//    Deliberately NOT here: a bare "winners" / "prizes", which live on plenty of
+//    live event pages ("₹5L prize pool"). Only "winners announced" is past tense.
+const RECAP_TITLE =
+  /\b(recap|highlights|takeaways|key learnings|lessons from|winners announced|what happened at|my experience|we built|how we built|wrap-?up|post-?mortem|retrospective|concludes?|concluded|wraps? up|wrapped up|kicks? off|kicked off|was held|took place|successfully (held|hosted|completed|concluded))\b/i;
+
+// 5. The window is shut. Worth its own rule because these pages are otherwise
+//    perfect event pages — right host, right shape, just no longer enterable.
+const CLOSED_TITLE =
+  /\b((applications?|registrations?|submissions?|entries) (are )?(now )?closed|closed for (applications?|registrations?|entries)|deadline (has )?(passed|expired)|sold out|event (has )?ended|no longer accepting)\b/i;
+
 // Exported for selftest — this is the gate that decides what reaches your chat,
 // and it's tuned against real leaked hits, so regressions must be visible offline.
+// Reads the snippet too for the past/closed rules: a page titled plainly
+// ("Sarvam Epoch") still gives itself away in the description ("winners announced").
 export function looksLikeArticle(hit) {
   const title = hit.title || "";
+  const body = `${title} ${hit.description || ""}`;
   if (ARTICLE_PATH.test(hit.url || "")) return true;
   if (ARTICLE_TITLE.test(title)) return true;
   if (ROUNDUP_TITLE.test(title)) return true;
+  if (RECAP_TITLE.test(title)) return true;
+  if (CLOSED_TITLE.test(body)) return true;
   return false;
 }
 
@@ -146,8 +190,15 @@ async function firecrawlQuery(q) {
     body: JSON.stringify({ query: q, limit: 10, tbs: "qdr:m", location: "India" }),
   });
   if (!r.ok) {
-    console.error("firecrawl fail:", r.status, r.status === 429 ? "(rate limited)" : "");
-    return { hits: [], blocked: r.status === 429 || r.status === 402 };
+    // 401/403 = the keyless tier is refusing us, which no amount of retrying fixes;
+    // treat it like a rate limit so the sweep stops instead of burning every query
+    // on the same rejection. Set FIRECRAWL_API_KEY, or config.webSearch.provider.
+    const why =
+      r.status === 429 ? "(rate limited)" :
+      r.status === 401 || r.status === 403 ? "(keyless access refused — set FIRECRAWL_API_KEY or BRAVE_API_KEY)" :
+      "";
+    console.error("firecrawl fail:", r.status, why);
+    return { hits: [], blocked: [429, 402, 401, 403].includes(r.status) };
   }
   const data = await r.json();
   if (!data?.success) {
@@ -213,13 +264,21 @@ async function ddgQuery(q) {
   return { hits, blocked };
 }
 
+// Queries carry {year}/{nextYear} rather than a literal year, so the sweep follows
+// the calendar instead of asking for a year that has already been and gone.
+// Exported for selftest.
+export function expandQuery(q, now = new Date()) {
+  const y = now.getUTCFullYear();
+  return String(q).replace(/\{year\}/gi, String(y)).replace(/\{nextYear\}/gi, String(y + 1));
+}
+
 export async function fetchWebSearch() {
   const provider = pickProvider();
   if (!provider) return [];
 
   const run = { brave: braveQuery, firecrawl: firecrawlQuery, ddg: ddgQuery }[provider];
   const gap = { brave: BRAVE_GAP_MS, firecrawl: FIRECRAWL_GAP_MS, ddg: DDG_GAP_MS }[provider];
-  const queries = config.searchQueries || [];
+  const queries = (config.searchQueries || []).map((q) => expandQuery(q));
 
   const out = [];
   const seenUrl = new Set();

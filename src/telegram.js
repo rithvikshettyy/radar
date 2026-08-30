@@ -1,7 +1,30 @@
 import { config } from "../config.js";
 
 const TOKEN = process.env.TELEGRAM_BOT_TOKEN;
-const CHAT = process.env.TELEGRAM_CHAT_ID;
+
+// TELEGRAM_CHAT_ID takes one or MORE targets, comma/space separated, so the same
+// run can feed your DM and a group your friends are in. Forms accepted:
+//   123456789            a person (positive id)
+//   -1001234567890       a group/supergroup (always negative, always -100…)
+//   @somechannel         a public channel by username
+//   -1001234567890:42    a specific topic inside a forum-enabled group
+// Split on the LAST colon only — a supergroup id starts with a minus, not a colon,
+// but "@name" and plain ids have no colon at all.
+export function parseTargets(raw) {
+  return String(raw || "")
+    .split(/[\s,;]+/)
+    .map((s) => s.trim())
+    .filter(Boolean)
+    .map((s) => {
+      const i = s.lastIndexOf(":");
+      if (i > 0 && /^\d+$/.test(s.slice(i + 1))) {
+        return { chatId: s.slice(0, i), topicId: Number(s.slice(i + 1)) };
+      }
+      return { chatId: s, topicId: null };
+    });
+}
+
+const TARGETS = parseTargets(process.env.TELEGRAM_CHAT_ID);
 
 // GitHub Actions runners are UTC, so without an explicit zone a 9pm IST event
 // renders as the previous day. Bad zone in config -> fall back to UTC, don't throw.
@@ -132,23 +155,41 @@ export function preview(ev, reminder = false) {
   return true;
 }
 
-export async function push(ev, reminder = false) {
-  if (!TOKEN || !CHAT) {
-    console.log("[dry] would send:\n" + fmt(ev, reminder) + "\n");
-    return true;
-  }
+async function sendTo(target, text) {
+  const body = {
+    chat_id: target.chatId,
+    text,
+    parse_mode: "HTML",
+    disable_web_page_preview: false,
+  };
+  // Forum groups reject a plain send into the General topic on some setups; naming
+  // the topic keeps the feed in its own tab instead of the main chat.
+  if (target.topicId != null) body.message_thread_id = target.topicId;
+
   const r = await fetch(`https://api.telegram.org/bot${TOKEN}/sendMessage`, {
     method: "POST",
     headers: { "content-type": "application/json" },
-    body: JSON.stringify({
-      chat_id: CHAT,
-      text: fmt(ev, reminder),
-      parse_mode: "HTML",
-      disable_web_page_preview: false,
-    }),
+    body: JSON.stringify(body),
   });
-  if (!r.ok) console.error("telegram fail:", r.status, await r.text());
+  if (!r.ok) console.error(`telegram fail [${target.chatId}]:`, r.status, await r.text());
   return r.ok;
+}
+
+export async function push(ev, reminder = false) {
+  const text = fmt(ev, reminder);
+  if (!TOKEN || !TARGETS.length) {
+    console.log("[dry] would send:\n" + text + "\n");
+    return true;
+  }
+  // Sequential, not Promise.all: Telegram caps a bot at ~30 messages/second overall
+  // and 20/minute into one group, and a burst gets 429s that drop alerts silently.
+  let anyOk = false;
+  for (const t of TARGETS) {
+    if (await sendTo(t, text)) anyOk = true;
+  }
+  // One dead target (kicked from a group) must not look like a total failure —
+  // the run counts a send as done if it landed anywhere.
+  return anyOk;
 }
 
 // Exported for selftest — the formatting is what silently breaks (Invalid Date,

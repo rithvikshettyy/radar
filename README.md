@@ -110,6 +110,7 @@ npm start          # real run (dry unless the Telegram env vars are set)
 | `npm run dry` | Fetches for real, never sends, **still writes `seen.json`**. |
 | `npm run seed` | Records everything as already-seen without notifying. Run once so an existing backlog doesn't arrive as one flood. |
 | `npm run selftest` | Offline checks on filtering + message formatting. |
+| `npm run chatid` | Prints every chat the bot can see, with its id. How you find a **group** id. |
 
 ### Telegram bot
 
@@ -125,11 +126,54 @@ TELEGRAM_BOT_TOKEN=xxx TELEGRAM_CHAT_ID=yyy npm start
 | Variable | Required | Purpose |
 |---|---|---|
 | `TELEGRAM_BOT_TOKEN` | yes (to actually send) | BotFather token |
-| `TELEGRAM_CHAT_ID` | yes (to actually send) | Your numeric chat id |
+| `TELEGRAM_CHAT_ID` | yes (to actually send) | One **or more** chat ids, comma separated |
 | `BRAVE_API_KEY` | no | Switches web search to Brave |
-| `FIRECRAWL_API_KEY` | no | Raises Firecrawl's rate limit. Usually leave it unset — see below |
+| `FIRECRAWL_API_KEY` | no | Raises Firecrawl's rate limit — and as of now the keyless tier 403s, so without one of these two keys the search net is off |
 
 Unset token/chat = dry mode: it prints what it *would* send.
+
+### Share it with a group
+
+The same run can feed several chats, so friends get the feed without each running
+their own copy. Nothing to deploy twice — just add ids.
+
+1. **Create the group** and add your bot to it.
+2. **Send `/start@yourbotname` in the group.** Not optional: Telegram bots have
+   *group privacy* on by default, so inside a group the bot only sees messages that
+   are commands or that @mention it. Until one arrives, the group is invisible to it.
+3. **Read the id:**
+   ```bash
+   TELEGRAM_BOT_TOKEN=xxx npm run chatid
+   ```
+   ```
+   chat id            type        name
+   -----------------  ----------  ----
+   123456789          private     You
+   -1001234567890     supergroup  Hack Radar
+   ```
+   Group ids are **negative**. `@userinfobot` only knows your personal id, which is
+   why this script exists.
+4. **Set both targets** — comma separated, no spaces needed:
+   ```bash
+   TELEGRAM_CHAT_ID=123456789,-1001234567890
+   ```
+   On GitHub Actions, edit the `TELEGRAM_CHAT_ID` secret to the same comma list.
+
+| Target form | Meaning |
+|---|---|
+| `123456789` | a person |
+| `-1001234567890` | a group / supergroup |
+| `@somechannel` | a public channel by username |
+| `-1001234567890:42` | topic `42` inside a forum-enabled group |
+
+A send that fails for one target (bot kicked, wrong id) is logged with that id and
+doesn't stop the others.
+
+**Two things worth knowing before you add friends.** The bot only *pushes* — it has
+no commands, so nobody in the group can query it or change the filters; tuning stays
+in `config.js`, which is yours. And `seen.json` is global, not per-chat: an event is
+sent once to every target at the same time, so a friend joining later sees only what
+comes next, not the backlog.
 
 ## Deploy on GitHub Actions
 
@@ -161,15 +205,20 @@ Everything lives in [`config.js`](config.js).
 | Key | Default | What it controls |
 |---|---|---|
 | `include` | AI/ML/hackathon terms | Whole-word keywords an event must match |
-| `exclude` | school-event terms | Kills a match outright |
+| `exclude` | school events, bootcamps, fashion | Kills a match outright |
 | `indiaOrRemoteOnly` | `true` | Restrict to India-based or online/remote |
 | `indiaOrRemoteHints` | 20+ cities + `online`/`remote`/`virtual` | What counts as India-or-remote |
 | `lumaIcsUrls` | `[]` | Luma calendars to watch (see below) |
 | `lumaDiscover` | `ai`+`tech` × 6 cities | Categories and city coordinates for the discovery sweep |
-| `webSearch.provider` | `auto` | `auto` \| `ddg` \| `brave` \| `off` |
-| `searchQueries` | 5 queries | What the web-search net looks for |
+| `webSearch.provider` | `auto` | `auto` \| `firecrawl` \| `ddg` \| `brave` \| `off` |
+| `searchQueries` | 6 queries | What the web-search net looks for. `{year}`/`{nextYear}` expand at run time |
+| `denyHosts` | socials, dev blogs | Extra hosts the search net must never surface |
 | `deadlineReminderHours` | `48` | How early the reminder fires |
 | `timezone` | `Asia/Kolkata` | IANA zone for dates in messages |
+
+`exclude` matches **whole words**, so plurals need their own entry — `"bootcamp"`
+does not match "bootcamps". Both are in the default list, along with `boot camp`,
+`masterclass`, `crash course` and `fashion`.
 
 ### Luma calendars
 
@@ -214,9 +263,20 @@ The keyless tier is documented for Firecrawl's own MCP/CLI/SDK clients; a plain
 HackCulture and Luma are what you actually rely on.
 
 Search hits aren't precurated, so they face the full keyword + India/remote gate, plus
-a `DENY_HOSTS` list in `websearch.js` that drops listicle/aggregator domains
-(reskilll, internshala, YouTube, Reddit …) and press-release wires (PR Newswire,
-Business Wire, GlobeNewswire).
+a denylist that drops listicle/aggregator domains (reskilll, internshala, YouTube,
+Reddit …), press-release wires (PR Newswire, Business Wire, GlobeNewswire), social
+posts (x.com, twitter.com, Threads, Bluesky) and developer-blog platforms (dev.to,
+Hashnode, Substack, Medium). The built-in list lives in `websearch.js`; add your own
+in `config.denyHosts` without touching source.
+
+Matching is on the **hostname**, subdomains included — not a substring of the URL.
+That distinction is load-bearing the moment a short entry like `x.com` is added: a
+substring check would also blackhole `phoenix.com` and `matrix.com`. An entry can
+carry a path to scope it, e.g. `devpost.com/c/` denies category pages only.
+
+Queries use `{year}` / `{nextYear}` rather than a literal year. Hard-coding `2026`
+rots quietly: come January the radar keeps asking for last year's events, then alerts
+you to pages about hackathons that already finished.
 
 **The article gate.** Most of what a search engine returns for these queries is
 *coverage* of an event, not the event: a press release, a news story, a "top 10
@@ -230,10 +290,39 @@ Host denylisting alone is whack-a-mole (every run surfaces a new outlet), so
 | editorial URL path | `/news/`, `/news-releases/`, `/newsroom/`, `/blog/`, `/story/`, `/2026/08/` |
 | press-release verb in the headline | *KnowBe4 **extends** agent security to…*, *Anthropic **says**…* |
 | roundup framing | *Top 10…*, *Events and Hackathons in Bangalore (April-May 2026)* |
+| write-up of a finished event | *…**Recap***, ***Winners announced** for…*, *Sarvam Epoch **concludes***, ***How we built***… |
+| the window is shut | *Registrations **are now closed***, ***sold out***, ***deadline passed*** — read from the snippet too, not just the title |
 
 A bare year segment (`hackindia.org/2026/…`) is deliberately *not* an archive path —
-real event sites organize by edition year. In a live run this drops ~7 of 11 hits.
-Every rule is pinned in `selftest.js` against hits that actually reached the chat.
+real event sites organize by edition year. Nor is a bare *winners* or *prizes* a recap
+signal — live event pages advertise prize pools. Every rule is pinned in
+`selftest.js` against hits that actually reached the chat.
+
+**Finished events, and why they used to arrive weeks late.** `isExpired()` only ever
+looked at the `deadline` field — and a web-search hit has none, so *nothing could
+retire one*. A page about a hackathon that ended in May still landed as a `🆕 NEW
+EVENT` in August. When there's no usable deadline, the dates are now read out of the
+event's own title/description instead, and the latest one is treated as its end:
+
+| Text | Read as |
+|---|---|
+| `12 Aug 2026`, `Aug 12, 2026`, `2026-08-12` | end of 12 Aug 2026 |
+| `August 2026` | end of Aug 2026 |
+| `AI Hackathon 2025` | end of 2025 → **expired** |
+| *(no date named)* | unknown → kept, there's nothing to check |
+
+Tiered by precision, most precise wins. Mixing tiers is worse than either: a page
+reading *"12 Aug 2026 … © 2026"* would inherit end-of-December from the stray year
+and sit in the feed four months after the event. Two details that bit in practice —
+the month pattern is an explicit alternation, because a loose one reads *"Marathon
+2026"* as March 2026 and expires live events five months early; and a year must stand
+alone, or the tweet id in `x.com/…/status/2084578727158317435` reads as the year 2084
+and keeps a months-old post alive forever.
+
+The scan deliberately ignores `tags`, which for a search hit is the query string —
+reading it would stamp the current year onto every hit and make the check pass
+unconditionally. Structured sources are unaffected: every one of them supplies a real
+deadline, so the text scan never judges them. Each run logs `expired=N`.
 
 **`"global"` is not an India/remote hint.** It was, and it's the one hint that names
 neither a place nor a delivery mode, so press-release boilerplate ("the *global*
@@ -280,7 +369,8 @@ text.
 └── src/
     ├── radar.js            # entry point: fetch → filter → dedupe → notify
     ├── filter.js           # id hashing, normalize(), relevance, expiry, reminders
-    ├── telegram.js         # HTML message formatting + sendMessage
+    ├── telegram.js         # HTML message formatting + multi-chat sendMessage
+    ├── chatid.js           # prints chat ids — how you find a group's
     ├── selftest.js         # offline checks
     └── sources/
         ├── basecamp.js  devfolio.js  devpost.js
@@ -313,6 +403,9 @@ source never kills the run.
 | `ddg fail: blocked (anomaly page)`, zero web hits | Expected on CI IPs — that's why `auto` uses Firecrawl instead. Only reachable now via `provider: "ddg"`. |
 | `firecrawl fail: 402` | A `FIRECRAWL_API_KEY` is set and its credits are gone. Unset it — the keyless tier has no credit budget. |
 | `firecrawl fail: 429` | Keyless rate limit. The sweep stops at the first block rather than hammering; next hourly run retries. |
+| `firecrawl fail: 403 (keyless access refused)` | Firecrawl has closed the keyless tier this fetch relied on. With DDG also blocked on CI, the search net is off until you set `BRAVE_API_KEY` (2k queries/mo free) or `FIRECRAWL_API_KEY`. Set `webSearch.provider: "off"` to stop trying. The structured sources are unaffected. |
+| A group gets nothing while your DM works | The bot isn't in the group, or was added but never spoken to — send `/start@yourbot` there, re-run `npm run chatid`, and check the id is the negative one. Per-target failures log as `telegram fail [<id>]`. |
+| `npm run chatid` prints no chats | Group privacy: bots only see commands or @mentions in a group. Send `/start@yourbot`. Also note `getUpdates` consumes what it returns, so a second run right after can legitimately show nothing. |
 | A source goes quiet | Devpost/MLH markup can change shape. Parsing is defensive, so it fails to zero results rather than crashing — check the run log's per-source counts. |
 | Scheduled runs stopped entirely | GitHub disables cron after 60 days of repo inactivity. Re-enable in the Actions tab. |
 
