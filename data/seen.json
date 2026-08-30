@@ -943,7 +943,7 @@
     "firstSeen": "2026-08-01T13:23:47.134Z"
   },
   "devfolio:avyvth": {
-    "remindedForDeadline": false,
+    "remindedForDeadline": true,
     "firstSeen": "2026-08-01T13:23:47.134Z"
   },
   "devfolio:1ouhy3a": {
@@ -3977,5 +3977,13 @@
   "search:z2xowj": {
     "remindedForDeadline": false,
     "firstSeen": "2026-08-30T18:21:20.142Z"
+  },
+  "search:1hbidkg": {
+    "remindedForDeadline": false,
+    "firstSeen": "2026-08-30T21:48:01.792Z"
+  },
+  "search:1q7p63": {
+    "remindedForDeadline": false,
+    "firstSeen": "2026-08-30T21:48:01.792Z"
   }
 }
