@@ -3915,7 +3915,7 @@
     "firstSeen": "2026-08-29T14:52:44.875Z"
   },
   "luma-discover:g32qnf": {
-    "remindedForDeadline": false,
+    "remindedForDeadline": true,
     "firstSeen": "2026-08-29T14:52:44.875Z"
   },
   "search:1kk6shx": {
@@ -4467,7 +4467,7 @@
     "firstSeen": "2026-09-07T05:33:33.973Z"
   },
   "luma-discover:141yzya": {
-    "remindedForDeadline": false,
+    "remindedForDeadline": true,
     "firstSeen": "2026-09-07T11:16:40.059Z"
   },
   "luma-discover:ojbipo": {
@@ -4611,7 +4611,7 @@
     "firstSeen": "2026-09-08T07:40:14.084Z"
   },
   "luma-discover:11xvulj": {
-    "remindedForDeadline": false,
+    "remindedForDeadline": true,
     "firstSeen": "2026-09-08T07:40:14.084Z"
   },
   "luma-discover:1k4cmua": {
@@ -4619,7 +4619,7 @@
     "firstSeen": "2026-09-08T07:40:14.084Z"
   },
   "luma-discover:v32h5x": {
-    "remindedForDeadline": false,
+    "remindedForDeadline": true,
     "firstSeen": "2026-09-08T07:40:14.084Z"
   },
   "search:1gida6": {
@@ -4761,5 +4761,13 @@
   "luma-discover:1sz4kks": {
     "remindedForDeadline": true,
     "firstSeen": "2026-09-10T07:44:45.903Z"
+  },
+  "luma-discover:1i71sm3": {
+    "remindedForDeadline": true,
+    "firstSeen": "2026-09-10T12:35:33.428Z"
+  },
+  "luma-discover:8stij": {
+    "remindedForDeadline": false,
+    "firstSeen": "2026-09-10T12:35:33.428Z"
   }
 }
