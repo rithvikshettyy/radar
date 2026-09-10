@@ -4785,5 +4785,13 @@
   "search:fgjwa8": {
     "remindedForDeadline": false,
     "firstSeen": "2026-09-10T16:49:28.244Z"
+  },
+  "luma-discover:1irwq6c": {
+    "remindedForDeadline": true,
+    "firstSeen": "2026-09-10T19:24:47.740Z"
+  },
+  "search:1urokfa": {
+    "remindedForDeadline": false,
+    "firstSeen": "2026-09-10T19:24:47.740Z"
   }
 }
