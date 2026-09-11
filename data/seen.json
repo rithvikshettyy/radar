@@ -4455,7 +4455,7 @@
     "firstSeen": "2026-09-07T00:36:18.818Z"
   },
   "devpost:v6v644": {
-    "remindedForDeadline": false,
+    "remindedForDeadline": true,
     "firstSeen": "2026-09-07T05:33:33.973Z"
   },
   "luma-discover:1knqfig": {
@@ -4801,5 +4801,9 @@
   "mlh:aio0yx": {
     "remindedForDeadline": false,
     "firstSeen": "2026-09-10T22:10:00.009Z"
+  },
+  "luma-discover:1h8j5bt": {
+    "remindedForDeadline": false,
+    "firstSeen": "2026-09-11T00:45:04.779Z"
   }
 }
