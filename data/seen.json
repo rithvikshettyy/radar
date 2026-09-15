@@ -5025,5 +5025,21 @@
   "devpost:1owheto": {
     "remindedForDeadline": false,
     "firstSeen": "2026-09-15T05:39:19.416Z"
+  },
+  "luma-discover:kat6gb": {
+    "remindedForDeadline": true,
+    "firstSeen": "2026-09-15T10:48:36.870Z"
+  },
+  "luma-discover:1qbm44e": {
+    "remindedForDeadline": false,
+    "firstSeen": "2026-09-15T10:48:36.870Z"
+  },
+  "luma-discover:b2dcdn": {
+    "remindedForDeadline": false,
+    "firstSeen": "2026-09-15T10:48:36.870Z"
+  },
+  "search:iyez95": {
+    "remindedForDeadline": false,
+    "firstSeen": "2026-09-15T10:48:36.870Z"
   }
 }
