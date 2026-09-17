@@ -4431,7 +4431,7 @@
     "firstSeen": "2026-09-06T16:38:11.778Z"
   },
   "devfolio:1o59p7k": {
-    "remindedForDeadline": false,
+    "remindedForDeadline": true,
     "firstSeen": "2026-09-06T20:59:22.178Z"
   },
   "luma-discover:1r3dusc": {
@@ -5149,5 +5149,17 @@
   "search:16duzil": {
     "remindedForDeadline": false,
     "firstSeen": "2026-09-17T16:00:36.679Z"
+  },
+  "luma-discover:os8nxr": {
+    "remindedForDeadline": false,
+    "firstSeen": "2026-09-17T19:40:17.110Z"
+  },
+  "luma-discover:4kpspc": {
+    "remindedForDeadline": false,
+    "firstSeen": "2026-09-17T19:40:17.110Z"
+  },
+  "luma-discover:1hxfr7o": {
+    "remindedForDeadline": true,
+    "firstSeen": "2026-09-17T19:40:17.110Z"
   }
 }
