@@ -5245,5 +5245,13 @@
   "search:j18h5q": {
     "remindedForDeadline": false,
     "firstSeen": "2026-09-18T18:00:05.611Z"
+  },
+  "devpost:1b6tm5z": {
+    "remindedForDeadline": false,
+    "firstSeen": "2026-09-18T20:44:31.178Z"
+  },
+  "luma-discover:xdcsx": {
+    "remindedForDeadline": true,
+    "firstSeen": "2026-09-18T20:44:31.178Z"
   }
 }
