@@ -5237,5 +5237,13 @@
   "luma-discover:i9ull0": {
     "remindedForDeadline": false,
     "firstSeen": "2026-09-18T14:44:16.987Z"
+  },
+  "luma-discover:tl4nv3": {
+    "remindedForDeadline": true,
+    "firstSeen": "2026-09-18T18:00:05.611Z"
+  },
+  "search:j18h5q": {
+    "remindedForDeadline": false,
+    "firstSeen": "2026-09-18T18:00:05.611Z"
   }
 }
