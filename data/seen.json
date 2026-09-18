@@ -5185,5 +5185,37 @@
   "luma-discover:vhmoni": {
     "remindedForDeadline": false,
     "firstSeen": "2026-09-18T05:31:21.152Z"
+  },
+  "luma-discover:camrvt": {
+    "remindedForDeadline": true,
+    "firstSeen": "2026-09-18T10:22:20.208Z"
+  },
+  "luma-discover:3jpxq9": {
+    "remindedForDeadline": false,
+    "firstSeen": "2026-09-18T10:22:20.208Z"
+  },
+  "luma-discover:1fojkhe": {
+    "remindedForDeadline": false,
+    "firstSeen": "2026-09-18T10:22:20.208Z"
+  },
+  "luma-discover:kotct8": {
+    "remindedForDeadline": false,
+    "firstSeen": "2026-09-18T10:22:20.208Z"
+  },
+  "luma-discover:uv3318": {
+    "remindedForDeadline": true,
+    "firstSeen": "2026-09-18T10:22:20.208Z"
+  },
+  "luma-discover:l6gbbv": {
+    "remindedForDeadline": true,
+    "firstSeen": "2026-09-18T10:22:20.208Z"
+  },
+  "search:1xguurq": {
+    "remindedForDeadline": false,
+    "firstSeen": "2026-09-18T10:22:20.208Z"
+  },
+  "search:uf4ev0": {
+    "remindedForDeadline": false,
+    "firstSeen": "2026-09-18T10:22:20.208Z"
   }
 }
