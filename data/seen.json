@@ -2715,7 +2715,7 @@
     "firstSeen": "2026-08-14T16:43:45.773Z"
   },
   "hackerearth:bge6eh": {
-    "remindedForDeadline": false,
+    "remindedForDeadline": true,
     "firstSeen": "2026-08-14T17:46:56.514Z"
   },
   "devfolio:xdlguy": {
@@ -4887,7 +4887,7 @@
     "firstSeen": "2026-09-12T11:52:35.539Z"
   },
   "hackerearth:qded0i": {
-    "remindedForDeadline": false,
+    "remindedForDeadline": true,
     "firstSeen": "2026-09-12T11:52:35.539Z"
   },
   "luma-discover:1x5jqop": {
@@ -5253,5 +5253,13 @@
   "luma-discover:xdcsx": {
     "remindedForDeadline": true,
     "firstSeen": "2026-09-18T20:44:31.178Z"
+  },
+  "devpost:3i62pc": {
+    "remindedForDeadline": true,
+    "firstSeen": "2026-09-18T22:57:16.375Z"
+  },
+  "search:10syic7": {
+    "remindedForDeadline": false,
+    "firstSeen": "2026-09-18T22:57:16.375Z"
   }
 }
