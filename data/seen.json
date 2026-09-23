@@ -3687,7 +3687,7 @@
     "firstSeen": "2026-08-26T10:28:12.584Z"
   },
   "devfolio:2ogkdi": {
-    "remindedForDeadline": false,
+    "remindedForDeadline": true,
     "firstSeen": "2026-08-26T11:22:28.740Z"
   },
   "devfolio:q81oob": {
@@ -5469,5 +5469,21 @@
   "luma-discover:1ui05bu": {
     "remindedForDeadline": false,
     "firstSeen": "2026-09-23T18:08:16.425Z"
+  },
+  "luma-discover:1v5uj1s": {
+    "remindedForDeadline": false,
+    "firstSeen": "2026-09-23T21:56:27.805Z"
+  },
+  "luma-discover:1vg3uep": {
+    "remindedForDeadline": false,
+    "firstSeen": "2026-09-23T21:56:27.805Z"
+  },
+  "luma-discover:2wk76b": {
+    "remindedForDeadline": false,
+    "firstSeen": "2026-09-23T21:56:27.805Z"
+  },
+  "luma-discover:b5tai1": {
+    "remindedForDeadline": false,
+    "firstSeen": "2026-09-23T21:56:27.805Z"
   }
 }
