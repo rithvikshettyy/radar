@@ -5645,5 +5645,13 @@
   "search:wint91": {
     "remindedForDeadline": false,
     "firstSeen": "2026-09-25T12:35:12.497Z"
+  },
+  "luma-discover:1v6fi4c": {
+    "remindedForDeadline": true,
+    "firstSeen": "2026-09-25T17:42:00.446Z"
+  },
+  "search:1cc7r6l": {
+    "remindedForDeadline": false,
+    "firstSeen": "2026-09-25T17:42:00.446Z"
   }
 }
