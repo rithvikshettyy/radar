@@ -2727,7 +2727,7 @@
     "firstSeen": "2026-08-14T18:43:50.965Z"
   },
   "devfolio:199zxep": {
-    "remindedForDeadline": false,
+    "remindedForDeadline": true,
     "firstSeen": "2026-08-14T18:43:50.965Z"
   },
   "luma-discover:1aroidb": {
@@ -5681,5 +5681,13 @@
   "search:1j1kn6w": {
     "remindedForDeadline": false,
     "firstSeen": "2026-09-26T17:33:12.596Z"
+  },
+  "luma-discover:1rejkfh": {
+    "remindedForDeadline": true,
+    "firstSeen": "2026-09-26T20:29:54.800Z"
+  },
+  "search:7heqwz": {
+    "remindedForDeadline": false,
+    "firstSeen": "2026-09-26T20:29:54.800Z"
   }
 }
