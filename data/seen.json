@@ -5673,5 +5673,13 @@
   "luma-discover:1alhele": {
     "remindedForDeadline": false,
     "firstSeen": "2026-09-26T08:19:52.625Z"
+  },
+  "devpost:t1c1xl": {
+    "remindedForDeadline": true,
+    "firstSeen": "2026-09-26T17:33:12.596Z"
+  },
+  "search:1j1kn6w": {
+    "remindedForDeadline": false,
+    "firstSeen": "2026-09-26T17:33:12.596Z"
   }
 }
