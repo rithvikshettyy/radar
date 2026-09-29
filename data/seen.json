@@ -5755,7 +5755,7 @@
     "firstSeen": "2026-09-29T06:29:50.492Z"
   },
   "luma-discover:1ef2s4z": {
-    "remindedForDeadline": false,
+    "remindedForDeadline": true,
     "firstSeen": "2026-09-29T06:29:50.492Z"
   },
   "luma-discover:19jknrd": {
@@ -5773,5 +5773,33 @@
   "hackculture:rx8xai": {
     "remindedForDeadline": false,
     "firstSeen": "2026-09-29T06:29:50.492Z"
+  },
+  "luma-discover:1fojkhf": {
+    "remindedForDeadline": false,
+    "firstSeen": "2026-09-29T13:38:37.140Z"
+  },
+  "luma-discover:1ayle8z": {
+    "remindedForDeadline": false,
+    "firstSeen": "2026-09-29T13:38:37.140Z"
+  },
+  "luma-discover:10j7s86": {
+    "remindedForDeadline": false,
+    "firstSeen": "2026-09-29T13:38:37.140Z"
+  },
+  "luma-discover:7ut5i3": {
+    "remindedForDeadline": false,
+    "firstSeen": "2026-09-29T13:38:37.140Z"
+  },
+  "luma-discover:x04hq8": {
+    "remindedForDeadline": false,
+    "firstSeen": "2026-09-29T13:38:37.140Z"
+  },
+  "luma-discover:sw574r": {
+    "remindedForDeadline": false,
+    "firstSeen": "2026-09-29T13:38:37.140Z"
+  },
+  "search:1wri2ti": {
+    "remindedForDeadline": false,
+    "firstSeen": "2026-09-29T13:38:37.140Z"
   }
 }
