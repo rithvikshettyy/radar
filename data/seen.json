@@ -5885,5 +5885,13 @@
   "luma-discover:1nf7i1i": {
     "remindedForDeadline": true,
     "firstSeen": "2026-09-30T21:08:49.310Z"
+  },
+  "devpost:7no39d": {
+    "remindedForDeadline": false,
+    "firstSeen": "2026-10-01T00:59:07.852Z"
+  },
+  "search:xzugdb": {
+    "remindedForDeadline": false,
+    "firstSeen": "2026-10-01T00:59:07.852Z"
   }
 }
