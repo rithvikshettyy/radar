@@ -5957,5 +5957,9 @@
   "luma-discover:153v48c": {
     "remindedForDeadline": true,
     "firstSeen": "2026-10-01T20:02:41.658Z"
+  },
+  "search:19dq90x": {
+    "remindedForDeadline": false,
+    "firstSeen": "2026-10-02T00:24:22.343Z"
   }
 }
