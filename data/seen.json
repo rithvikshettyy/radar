@@ -6025,5 +6025,21 @@
   "sarvam:q7swbc": {
     "remindedForDeadline": false,
     "firstSeen": "2026-10-03T12:55:45.964Z"
+  },
+  "devpost:jd3843": {
+    "remindedForDeadline": false,
+    "firstSeen": "2026-10-03T16:56:59.072Z"
+  },
+  "luma-discover:qr9a1u": {
+    "remindedForDeadline": false,
+    "firstSeen": "2026-10-03T16:56:59.072Z"
+  },
+  "luma-discover:v7b9b": {
+    "remindedForDeadline": true,
+    "firstSeen": "2026-10-03T16:56:59.072Z"
+  },
+  "luma-discover:1c07hzu": {
+    "remindedForDeadline": false,
+    "firstSeen": "2026-10-03T16:56:59.072Z"
   }
 }
