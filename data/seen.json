@@ -5911,7 +5911,7 @@
     "firstSeen": "2026-10-01T07:00:02.991Z"
   },
   "luma-discover:rorm39": {
-    "remindedForDeadline": false,
+    "remindedForDeadline": true,
     "firstSeen": "2026-10-01T14:21:37.357Z"
   },
   "luma-discover:19tefy6": {
@@ -6113,5 +6113,65 @@
   "search:4nzzow": {
     "remindedForDeadline": false,
     "firstSeen": "2026-10-05T08:04:21.567Z"
+  },
+  "devpost:1kj3n5k": {
+    "remindedForDeadline": false,
+    "firstSeen": "2026-10-05T17:40:59.060Z"
+  },
+  "luma-discover:v174yu": {
+    "remindedForDeadline": true,
+    "firstSeen": "2026-10-05T17:40:59.060Z"
+  },
+  "luma-discover:ynyknp": {
+    "remindedForDeadline": false,
+    "firstSeen": "2026-10-05T17:40:59.060Z"
+  },
+  "luma-discover:1up10qd": {
+    "remindedForDeadline": false,
+    "firstSeen": "2026-10-05T17:40:59.060Z"
+  },
+  "luma-discover:t3oy36": {
+    "remindedForDeadline": false,
+    "firstSeen": "2026-10-05T17:40:59.060Z"
+  },
+  "luma-discover:1vffsjc": {
+    "remindedForDeadline": false,
+    "firstSeen": "2026-10-05T17:40:59.060Z"
+  },
+  "luma-discover:1pd71t8": {
+    "remindedForDeadline": true,
+    "firstSeen": "2026-10-05T17:40:59.060Z"
+  },
+  "luma-discover:jlnp4z": {
+    "remindedForDeadline": true,
+    "firstSeen": "2026-10-05T17:40:59.060Z"
+  },
+  "luma-discover:1rpx2g3": {
+    "remindedForDeadline": false,
+    "firstSeen": "2026-10-05T17:40:59.060Z"
+  },
+  "luma-discover:15rflct": {
+    "remindedForDeadline": false,
+    "firstSeen": "2026-10-05T17:40:59.060Z"
+  },
+  "luma-discover:1m1a9aa": {
+    "remindedForDeadline": false,
+    "firstSeen": "2026-10-05T17:40:59.060Z"
+  },
+  "luma-discover:1n9ht4y": {
+    "remindedForDeadline": false,
+    "firstSeen": "2026-10-05T17:40:59.060Z"
+  },
+  "luma-discover:1319gls": {
+    "remindedForDeadline": true,
+    "firstSeen": "2026-10-05T17:40:59.060Z"
+  },
+  "search:jyobwh": {
+    "remindedForDeadline": false,
+    "firstSeen": "2026-10-05T17:40:59.060Z"
+  },
+  "search:s5xx1m": {
+    "remindedForDeadline": false,
+    "firstSeen": "2026-10-05T17:40:59.060Z"
   }
 }
