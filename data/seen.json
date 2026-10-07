@@ -5603,7 +5603,7 @@
     "firstSeen": "2026-09-25T12:35:12.497Z"
   },
   "devfolio:1nummy3": {
-    "remindedForDeadline": false,
+    "remindedForDeadline": true,
     "firstSeen": "2026-09-25T12:35:12.497Z"
   },
   "devfolio:leoltx": {
@@ -6345,5 +6345,13 @@
   "search:1kasbhc": {
     "remindedForDeadline": false,
     "firstSeen": "2026-10-07T15:58:25.335Z"
+  },
+  "luma-discover:sekrxq": {
+    "remindedForDeadline": false,
+    "firstSeen": "2026-10-07T21:03:56.317Z"
+  },
+  "luma-discover:piksqh": {
+    "remindedForDeadline": false,
+    "firstSeen": "2026-10-07T21:03:56.317Z"
   }
 }
