@@ -5735,7 +5735,7 @@
     "firstSeen": "2026-09-28T06:12:46.270Z"
   },
   "devfolio:1k4snyv": {
-    "remindedForDeadline": false,
+    "remindedForDeadline": true,
     "firstSeen": "2026-09-28T14:49:48.444Z"
   },
   "luma-discover:1j5okgu": {
@@ -6425,5 +6425,17 @@
   "search:tdsvxx": {
     "remindedForDeadline": false,
     "firstSeen": "2026-10-08T16:00:56.408Z"
+  },
+  "luma-discover:1585haf": {
+    "remindedForDeadline": true,
+    "firstSeen": "2026-10-09T01:37:16.756Z"
+  },
+  "hackculture:vxzg93": {
+    "remindedForDeadline": true,
+    "firstSeen": "2026-10-09T01:37:16.756Z"
+  },
+  "search:1nt97xl": {
+    "remindedForDeadline": false,
+    "firstSeen": "2026-10-09T01:37:16.756Z"
   }
 }
