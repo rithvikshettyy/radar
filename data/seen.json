@@ -6379,7 +6379,7 @@
     "firstSeen": "2026-10-08T08:15:33.491Z"
   },
   "hackculture:mu822": {
-    "remindedForDeadline": false,
+    "remindedForDeadline": true,
     "firstSeen": "2026-10-08T08:15:33.491Z"
   },
   "search:hbale7": {
@@ -6497,5 +6497,13 @@
   "search:1bxxwxj": {
     "remindedForDeadline": false,
     "firstSeen": "2026-10-10T00:24:54.446Z"
+  },
+  "devpost:1us9fgk": {
+    "remindedForDeadline": false,
+    "firstSeen": "2026-10-10T06:34:59.575Z"
+  },
+  "search:1unstnz": {
+    "remindedForDeadline": false,
+    "firstSeen": "2026-10-10T06:34:59.575Z"
   }
 }
