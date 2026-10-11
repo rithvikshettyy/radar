@@ -5887,7 +5887,7 @@
     "firstSeen": "2026-09-30T21:08:49.310Z"
   },
   "devpost:7no39d": {
-    "remindedForDeadline": false,
+    "remindedForDeadline": true,
     "firstSeen": "2026-10-01T00:59:07.852Z"
   },
   "search:xzugdb": {
@@ -6295,7 +6295,7 @@
     "firstSeen": "2026-10-07T08:09:50.709Z"
   },
   "devpost:aecc82": {
-    "remindedForDeadline": false,
+    "remindedForDeadline": true,
     "firstSeen": "2026-10-07T15:58:25.335Z"
   },
   "devfolio:1naydxs": {
@@ -6533,5 +6533,13 @@
   "search:xq9djk": {
     "remindedForDeadline": false,
     "firstSeen": "2026-10-10T18:09:10.452Z"
+  },
+  "search:1t47rxm": {
+    "remindedForDeadline": false,
+    "firstSeen": "2026-10-11T01:27:14.147Z"
+  },
+  "search:mml9kr": {
+    "remindedForDeadline": false,
+    "firstSeen": "2026-10-11T01:27:14.147Z"
   }
 }
