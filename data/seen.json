@@ -4991,7 +4991,7 @@
     "firstSeen": "2026-09-14T21:16:25.675Z"
   },
   "luma-discover:1xfohbf": {
-    "remindedForDeadline": false,
+    "remindedForDeadline": true,
     "firstSeen": "2026-09-14T21:16:25.675Z"
   },
   "luma-discover:1xvo3e6": {
@@ -5355,7 +5355,7 @@
     "firstSeen": "2026-09-21T11:40:20.495Z"
   },
   "luma-discover:nw38it": {
-    "remindedForDeadline": false,
+    "remindedForDeadline": true,
     "firstSeen": "2026-09-21T11:40:20.495Z"
   },
   "luma-discover:1dq0dfb": {
@@ -6199,11 +6199,11 @@
     "firstSeen": "2026-10-06T11:39:30.584Z"
   },
   "luma-discover:1uyj89v": {
-    "remindedForDeadline": false,
+    "remindedForDeadline": true,
     "firstSeen": "2026-10-06T11:39:30.584Z"
   },
   "luma-discover:13v540f": {
-    "remindedForDeadline": false,
+    "remindedForDeadline": true,
     "firstSeen": "2026-10-06T11:39:30.584Z"
   },
   "luma-discover:x2q5n0": {
@@ -6219,7 +6219,7 @@
     "firstSeen": "2026-10-06T11:39:30.584Z"
   },
   "luma-discover:dgr3yr": {
-    "remindedForDeadline": false,
+    "remindedForDeadline": true,
     "firstSeen": "2026-10-06T11:39:30.584Z"
   },
   "luma-discover:yz4bzh": {
@@ -6643,7 +6643,7 @@
     "firstSeen": "2026-10-13T09:57:07.172Z"
   },
   "luma-discover:1x8r9as": {
-    "remindedForDeadline": false,
+    "remindedForDeadline": true,
     "firstSeen": "2026-10-13T09:57:07.172Z"
   },
   "luma-discover:1dbi7pl": {
@@ -6661,5 +6661,25 @@
   "search:1b6wmms": {
     "remindedForDeadline": false,
     "firstSeen": "2026-10-13T09:57:07.172Z"
+  },
+  "luma-discover:1yt0y9y": {
+    "remindedForDeadline": false,
+    "firstSeen": "2026-10-13T17:21:19.833Z"
+  },
+  "luma-discover:9ge35i": {
+    "remindedForDeadline": true,
+    "firstSeen": "2026-10-13T17:21:19.833Z"
+  },
+  "luma-discover:fs84nu": {
+    "remindedForDeadline": false,
+    "firstSeen": "2026-10-13T17:21:19.833Z"
+  },
+  "luma-discover:13aqwgz": {
+    "remindedForDeadline": false,
+    "firstSeen": "2026-10-13T17:21:19.833Z"
+  },
+  "search:1uqclov": {
+    "remindedForDeadline": false,
+    "firstSeen": "2026-10-13T17:21:19.833Z"
   }
 }
