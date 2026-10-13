@@ -660,7 +660,7 @@
     "remindedForDeadline": true
   },
   "devfolio:113ey3x": {
-    "remindedForDeadline": false
+    "remindedForDeadline": true
   },
   "devfolio:33vl4a": {
     "remindedForDeadline": true
@@ -6681,5 +6681,13 @@
   "search:1uqclov": {
     "remindedForDeadline": false,
     "firstSeen": "2026-10-13T17:21:19.833Z"
+  },
+  "luma-discover:gogq2z": {
+    "remindedForDeadline": false,
+    "firstSeen": "2026-10-13T22:09:24.908Z"
+  },
+  "luma-discover:1tv0sf4": {
+    "remindedForDeadline": false,
+    "firstSeen": "2026-10-13T22:09:24.908Z"
   }
 }
