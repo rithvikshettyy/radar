@@ -6737,5 +6737,29 @@
   "search:dvtcll": {
     "remindedForDeadline": false,
     "firstSeen": "2026-10-14T12:41:27.707Z"
+  },
+  "devpost:4wegc8": {
+    "remindedForDeadline": true,
+    "firstSeen": "2026-10-14T17:42:58.540Z"
+  },
+  "devpost:wkb1xt": {
+    "remindedForDeadline": false,
+    "firstSeen": "2026-10-14T17:42:58.540Z"
+  },
+  "luma-discover:qfdnqi": {
+    "remindedForDeadline": false,
+    "firstSeen": "2026-10-14T17:42:58.540Z"
+  },
+  "luma-discover:1frpmq7": {
+    "remindedForDeadline": false,
+    "firstSeen": "2026-10-14T17:42:58.540Z"
+  },
+  "luma-discover:1yzj3t6": {
+    "remindedForDeadline": false,
+    "firstSeen": "2026-10-14T17:42:58.540Z"
+  },
+  "hackculture:wcy6p1": {
+    "remindedForDeadline": true,
+    "firstSeen": "2026-10-14T17:42:58.540Z"
   }
 }
