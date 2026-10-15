@@ -51,6 +51,8 @@ Hacker House Goa 2026   ← tappable link   Sarvam Epoch
 | **Devfolio** | public API | India's main hackathon host — Hacker House Goa, most Indian hackathons. Precurated. | no |
 | **Luma discover** | public API | Sweeps `ai` + `tech` events around 6 Indian cities incl. Goa. Catches one-off events in no calendar: hacker houses, makeathons, demo days. Surfaces `sold out` / `N spots left`. | no |
 | **HackCulture** | public API | India-focused host for corporate/campus hackathons and innovation challenges — Sarvam BuildIn' Hours, GFF fintech sprints, campus hackathons. Precurated, registration-open only. | no |
+| **HackBriven** | public API | India student hackathon/event host (`hackbriven.com/api/events`). Hackathons precurated, registration-open only. | no |
+| **Vybe Driven** | site chunk scrape | Mumbai hackathon/tech-event aggregator; no API, so reads the hashed `opportunities-*.js` chunk off the live HTML. Hackathons precurated. | no |
 | **Luma calendars** | ICS | Communities you explicitly subscribe to. | no |
 | **Devpost** | JSON | Global hackathons. | no |
 | **HackerEarth** | public API | Hackathons + competitive challenges. | no |
@@ -374,7 +376,7 @@ text.
     ├── selftest.js         # offline checks
     └── sources/
         ├── basecamp.js  devfolio.js  devpost.js
-        ├── hackculture.js  hackerearth.js  mlh.js  sarvam.js
+        ├── hackbriven.js  hackculture.js  hackerearth.js  mlh.js  sarvam.js  vybedriven.js
         └── luma.js  luma-discover.js  websearch.js
 ```
 

@@ -6,6 +6,8 @@ import { fetchLumaDiscover } from "./sources/luma-discover.js";
 import { fetchMLH } from "./sources/mlh.js";
 import { fetchHackerEarth } from "./sources/hackerearth.js";
 import { fetchHackCulture } from "./sources/hackculture.js";
+import { fetchHackBriven } from "./sources/hackbriven.js";
+import { fetchVybeDriven } from "./sources/vybedriven.js";
 import { fetchSarvam } from "./sources/sarvam.js";
 import { fetchBasecamp } from "./sources/basecamp.js";
 import { fetchWebSearch } from "./sources/websearch.js";
@@ -38,6 +40,8 @@ async function main() {
     fetchMLH(),
     fetchHackerEarth(),
     fetchHackCulture(),
+    fetchHackBriven(),
+    fetchVybeDriven(),
     fetchSarvam(),
     fetchBasecamp(),
     fetchWebSearch(),
