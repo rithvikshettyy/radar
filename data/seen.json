@@ -6921,5 +6921,9 @@
   "luma-discover:1fydlli": {
     "remindedForDeadline": false,
     "firstSeen": "2026-10-16T19:10:50.663Z"
+  },
+  "devpost:1yk2wfd": {
+    "remindedForDeadline": true,
+    "firstSeen": "2026-10-17T05:18:36.980Z"
   }
 }
