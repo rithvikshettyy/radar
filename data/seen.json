@@ -5347,7 +5347,7 @@
     "firstSeen": "2026-09-21T11:40:20.495Z"
   },
   "luma-discover:xrz7n8": {
-    "remindedForDeadline": false,
+    "remindedForDeadline": true,
     "firstSeen": "2026-09-21T11:40:20.495Z"
   },
   "luma-discover:9jwsbp": {
@@ -6687,7 +6687,7 @@
     "firstSeen": "2026-10-13T22:09:24.908Z"
   },
   "luma-discover:1tv0sf4": {
-    "remindedForDeadline": false,
+    "remindedForDeadline": true,
     "firstSeen": "2026-10-13T22:09:24.908Z"
   },
   "luma-discover:1yje3rp": {
@@ -7091,7 +7091,7 @@
     "firstSeen": "2026-10-19T22:44:28.451Z"
   },
   "luma-discover:1bmrq3c": {
-    "remindedForDeadline": false,
+    "remindedForDeadline": true,
     "firstSeen": "2026-10-20T06:58:59.998Z"
   },
   "luma-discover:5i7hb8": {
@@ -7181,5 +7181,45 @@
   "luma-discover:1w3ftr4": {
     "remindedForDeadline": false,
     "firstSeen": "2026-10-21T05:37:43.215Z"
+  },
+  "luma-discover:1baida0": {
+    "remindedForDeadline": false,
+    "firstSeen": "2026-10-21T10:58:07.527Z"
+  },
+  "luma-discover:1xq12i4": {
+    "remindedForDeadline": false,
+    "firstSeen": "2026-10-21T10:58:07.527Z"
+  },
+  "luma-discover:1ahielu": {
+    "remindedForDeadline": false,
+    "firstSeen": "2026-10-21T10:58:07.527Z"
+  },
+  "luma-discover:2jfgc1": {
+    "remindedForDeadline": false,
+    "firstSeen": "2026-10-21T10:58:07.527Z"
+  },
+  "luma-discover:cwon8": {
+    "remindedForDeadline": false,
+    "firstSeen": "2026-10-21T10:58:07.527Z"
+  },
+  "luma-discover:ec5t7e": {
+    "remindedForDeadline": false,
+    "firstSeen": "2026-10-21T10:58:07.527Z"
+  },
+  "luma-discover:1vs6k57": {
+    "remindedForDeadline": false,
+    "firstSeen": "2026-10-21T10:58:07.527Z"
+  },
+  "luma-discover:nf2v3z": {
+    "remindedForDeadline": false,
+    "firstSeen": "2026-10-21T10:58:07.527Z"
+  },
+  "luma-discover:qwcfec": {
+    "remindedForDeadline": false,
+    "firstSeen": "2026-10-21T10:58:07.527Z"
+  },
+  "luma-discover:oyiuhy": {
+    "remindedForDeadline": false,
+    "firstSeen": "2026-10-21T10:58:07.527Z"
   }
 }
