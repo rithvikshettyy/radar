@@ -7387,7 +7387,11 @@
     "firstSeen": "2026-10-24T11:46:32.862Z"
   },
   "hackerearth:16f3ujg": {
-    "remindedForDeadline": false,
+    "remindedForDeadline": true,
     "firstSeen": "2026-10-24T11:46:32.862Z"
+  },
+  "luma-discover:176y2s4": {
+    "remindedForDeadline": false,
+    "firstSeen": "2026-10-24T15:11:57.171Z"
   }
 }
