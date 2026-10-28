@@ -6607,7 +6607,7 @@
     "firstSeen": "2026-10-12T20:42:34.911Z"
   },
   "luma-discover:c6jybf": {
-    "remindedForDeadline": false,
+    "remindedForDeadline": true,
     "firstSeen": "2026-10-12T20:42:34.911Z"
   },
   "luma-discover:16haa4j": {
@@ -7023,7 +7023,7 @@
     "firstSeen": "2026-10-19T05:34:11.793Z"
   },
   "luma-discover:1o5p1fx": {
-    "remindedForDeadline": false,
+    "remindedForDeadline": true,
     "firstSeen": "2026-10-19T05:34:11.793Z"
   },
   "search:1os5fj9": {
@@ -7191,7 +7191,7 @@
     "firstSeen": "2026-10-21T10:58:07.527Z"
   },
   "luma-discover:1ahielu": {
-    "remindedForDeadline": false,
+    "remindedForDeadline": true,
     "firstSeen": "2026-10-21T10:58:07.527Z"
   },
   "luma-discover:2jfgc1": {
@@ -7479,7 +7479,7 @@
     "firstSeen": "2026-10-26T14:44:24.181Z"
   },
   "luma-discover:u20jbn": {
-    "remindedForDeadline": false,
+    "remindedForDeadline": true,
     "firstSeen": "2026-10-26T14:44:24.181Z"
   },
   "luma-discover:1alcpef": {
@@ -7535,7 +7535,7 @@
     "firstSeen": "2026-10-27T05:50:59.101Z"
   },
   "luma-discover:1tek4oq": {
-    "remindedForDeadline": false,
+    "remindedForDeadline": true,
     "firstSeen": "2026-10-27T05:50:59.101Z"
   },
   "luma-discover:1ivs9vt": {
@@ -7587,7 +7587,7 @@
     "firstSeen": "2026-10-27T17:11:12.292Z"
   },
   "luma-discover:17ah3f6": {
-    "remindedForDeadline": false,
+    "remindedForDeadline": true,
     "firstSeen": "2026-10-27T17:11:12.292Z"
   },
   "luma-discover:1n2sz4f": {
@@ -7631,11 +7631,19 @@
     "firstSeen": "2026-10-28T06:30:03.071Z"
   },
   "luma-discover:1wgypda": {
-    "remindedForDeadline": false,
+    "remindedForDeadline": true,
     "firstSeen": "2026-10-28T06:30:03.071Z"
   },
   "luma-discover:1gxjiqs": {
     "remindedForDeadline": false,
     "firstSeen": "2026-10-28T06:30:03.071Z"
+  },
+  "luma-discover:h0jiyt": {
+    "remindedForDeadline": false,
+    "firstSeen": "2026-10-28T13:42:44.715Z"
+  },
+  "luma-discover:1iawer0": {
+    "remindedForDeadline": false,
+    "firstSeen": "2026-10-28T13:42:44.715Z"
   }
 }
