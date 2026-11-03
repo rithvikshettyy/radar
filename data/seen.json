@@ -7937,5 +7937,17 @@
   "search:1m86whc": {
     "remindedForDeadline": false,
     "firstSeen": "2026-11-02T17:39:34.109Z"
+  },
+  "luma-discover:bze4or": {
+    "remindedForDeadline": false,
+    "firstSeen": "2026-11-03T00:17:19.391Z"
+  },
+  "luma-discover:1nd1ral": {
+    "remindedForDeadline": true,
+    "firstSeen": "2026-11-03T00:17:19.391Z"
+  },
+  "search:ovww56": {
+    "remindedForDeadline": false,
+    "firstSeen": "2026-11-03T00:17:19.391Z"
   }
 }
