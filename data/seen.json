@@ -8001,5 +8001,21 @@
   "search:v3d5p7": {
     "remindedForDeadline": false,
     "firstSeen": "2026-11-03T15:41:57.269Z"
+  },
+  "luma-discover:car3pq": {
+    "remindedForDeadline": false,
+    "firstSeen": "2026-11-03T21:24:32.365Z"
+  },
+  "luma-discover:14ck10k": {
+    "remindedForDeadline": true,
+    "firstSeen": "2026-11-03T21:24:32.365Z"
+  },
+  "search:2lctri": {
+    "remindedForDeadline": false,
+    "firstSeen": "2026-11-03T21:24:32.365Z"
+  },
+  "search:hl7vk1": {
+    "remindedForDeadline": false,
+    "firstSeen": "2026-11-03T21:24:32.365Z"
   }
 }
