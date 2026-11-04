@@ -8037,5 +8037,9 @@
   "search:1bhoy8e": {
     "remindedForDeadline": false,
     "firstSeen": "2026-11-04T16:44:01.722Z"
+  },
+  "luma-discover:1i32q2e": {
+    "remindedForDeadline": true,
+    "firstSeen": "2026-11-04T22:19:11.485Z"
   }
 }
