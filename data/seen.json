@@ -8041,5 +8041,9 @@
   "luma-discover:1i32q2e": {
     "remindedForDeadline": true,
     "firstSeen": "2026-11-04T22:19:11.485Z"
+  },
+  "devpost:1f1mww1": {
+    "remindedForDeadline": false,
+    "firstSeen": "2026-11-05T02:59:45.007Z"
   }
 }
