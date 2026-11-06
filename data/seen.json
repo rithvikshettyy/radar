@@ -8121,5 +8121,17 @@
   "luma-discover:1g66a5l": {
     "remindedForDeadline": true,
     "firstSeen": "2026-11-06T04:37:18.982Z"
+  },
+  "luma-discover:j2ou4a": {
+    "remindedForDeadline": false,
+    "firstSeen": "2026-11-06T12:38:58.864Z"
+  },
+  "luma-discover:h9w0ln": {
+    "remindedForDeadline": false,
+    "firstSeen": "2026-11-06T12:38:58.864Z"
+  },
+  "search:1ypjqku": {
+    "remindedForDeadline": false,
+    "firstSeen": "2026-11-06T12:38:58.864Z"
   }
 }
