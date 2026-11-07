@@ -8149,5 +8149,9 @@
   "search:1dfdov0": {
     "remindedForDeadline": false,
     "firstSeen": "2026-11-06T19:47:38.197Z"
+  },
+  "devpost:12d9gxb": {
+    "remindedForDeadline": true,
+    "firstSeen": "2026-11-07T04:02:03.193Z"
   }
 }
