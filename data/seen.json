@@ -8277,5 +8277,21 @@
   "devfolio:12k9t5t": {
     "remindedForDeadline": false,
     "firstSeen": "2026-11-09T22:49:56.346Z"
+  },
+  "luma-discover:bp7ol8": {
+    "remindedForDeadline": false,
+    "firstSeen": "2026-11-10T04:27:32.083Z"
+  },
+  "luma-discover:1por9pv": {
+    "remindedForDeadline": true,
+    "firstSeen": "2026-11-10T04:27:32.083Z"
+  },
+  "luma-discover:1l8foi3": {
+    "remindedForDeadline": false,
+    "firstSeen": "2026-11-10T04:27:32.083Z"
+  },
+  "search:uc3bq8": {
+    "remindedForDeadline": false,
+    "firstSeen": "2026-11-10T04:27:32.083Z"
   }
 }
