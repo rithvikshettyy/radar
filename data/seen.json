@@ -7775,7 +7775,7 @@
     "firstSeen": "2026-10-30T16:25:25.736Z"
   },
   "hackerearth:14nv8no": {
-    "remindedForDeadline": false,
+    "remindedForDeadline": true,
     "firstSeen": "2026-10-30T16:25:25.736Z"
   },
   "hackculture:160n46t": {
@@ -8809,5 +8809,13 @@
   "search:mwdi4l": {
     "remindedForDeadline": false,
     "firstSeen": "2026-11-16T17:45:50.884Z"
+  },
+  "luma-discover:rnxcaa": {
+    "remindedForDeadline": false,
+    "firstSeen": "2026-11-17T01:24:48.508Z"
+  },
+  "search:cwm8a8": {
+    "remindedForDeadline": false,
+    "firstSeen": "2026-11-17T01:24:48.508Z"
   }
 }
