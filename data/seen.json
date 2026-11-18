@@ -7051,7 +7051,7 @@
     "firstSeen": "2026-10-19T11:47:05.596Z"
   },
   "luma-discover:13zglmp": {
-    "remindedForDeadline": false,
+    "remindedForDeadline": true,
     "firstSeen": "2026-10-19T11:47:05.596Z"
   },
   "search:136ma16": {
@@ -7435,7 +7435,7 @@
     "firstSeen": "2026-10-25T07:59:49.794Z"
   },
   "luma-discover:1e1ra78": {
-    "remindedForDeadline": false,
+    "remindedForDeadline": true,
     "firstSeen": "2026-10-25T07:59:49.794Z"
   },
   "luma-discover:j3qf5i": {
@@ -8319,7 +8319,7 @@
     "firstSeen": "2026-11-10T13:11:13.080Z"
   },
   "luma-discover:b4jd1a": {
-    "remindedForDeadline": false,
+    "remindedForDeadline": true,
     "firstSeen": "2026-11-10T13:11:13.080Z"
   },
   "luma-discover:1y6irt4": {
@@ -9041,5 +9041,53 @@
   "search:1d96v3n": {
     "remindedForDeadline": false,
     "firstSeen": "2026-11-18T01:31:54.491Z"
+  },
+  "luma-discover:8zdinv": {
+    "remindedForDeadline": false,
+    "firstSeen": "2026-11-18T09:36:28.117Z"
+  },
+  "luma-discover:1vnsgdr": {
+    "remindedForDeadline": false,
+    "firstSeen": "2026-11-18T09:36:28.117Z"
+  },
+  "luma-discover:1sqhnza": {
+    "remindedForDeadline": false,
+    "firstSeen": "2026-11-18T09:36:28.117Z"
+  },
+  "luma-discover:1apekki": {
+    "remindedForDeadline": false,
+    "firstSeen": "2026-11-18T09:36:28.117Z"
+  },
+  "luma-discover:1ah85p9": {
+    "remindedForDeadline": true,
+    "firstSeen": "2026-11-18T09:36:28.117Z"
+  },
+  "luma-discover:1ibb31d": {
+    "remindedForDeadline": false,
+    "firstSeen": "2026-11-18T09:36:28.117Z"
+  },
+  "luma-discover:ai5oe8": {
+    "remindedForDeadline": true,
+    "firstSeen": "2026-11-18T09:36:28.117Z"
+  },
+  "luma-discover:c5qyi6": {
+    "remindedForDeadline": false,
+    "firstSeen": "2026-11-18T09:36:28.117Z"
+  },
+  "luma-discover:1al5b2m": {
+    "remindedForDeadline": false,
+    "firstSeen": "2026-11-18T09:36:28.117Z"
+  },
+  "luma-discover:pdn9lw": {
+    "remindedForDeadline": false,
+    "firstSeen": "2026-11-18T09:36:28.117Z"
+  },
+  "luma-discover:b82g88": {
+    "remindedForDeadline": false,
+    "firstSeen": "2026-11-18T09:36:28.117Z"
+  },
+  "search:17vbl4": {
+    "remindedForDeadline": false,
+    "firstSeen": "2026-11-18T09:36:28.117Z"
   }
 }
