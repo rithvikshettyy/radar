@@ -7831,7 +7831,7 @@
     "firstSeen": "2026-10-31T14:09:48.665Z"
   },
   "luma-discover:1xu3l5": {
-    "remindedForDeadline": false,
+    "remindedForDeadline": true,
     "firstSeen": "2026-10-31T14:09:48.665Z"
   },
   "search:1pq0n4e": {
@@ -8107,7 +8107,7 @@
     "firstSeen": "2026-11-05T18:26:11.518Z"
   },
   "luma-discover:1l1qus6": {
-    "remindedForDeadline": false,
+    "remindedForDeadline": true,
     "firstSeen": "2026-11-05T18:26:11.518Z"
   },
   "luma-discover:1nukwcv": {
@@ -10787,7 +10787,7 @@
     "firstSeen": "2026-11-23T10:06:45.354Z"
   },
   "devfolio:1qbf5w1": {
-    "remindedForDeadline": false,
+    "remindedForDeadline": true,
     "firstSeen": "2026-11-23T22:23:00.837Z"
   },
   "luma-discover:42h382": {
@@ -11299,7 +11299,7 @@
     "firstSeen": "2026-11-25T11:58:36.144Z"
   },
   "luma-discover:9cvjy7": {
-    "remindedForDeadline": false,
+    "remindedForDeadline": true,
     "firstSeen": "2026-11-25T11:58:36.144Z"
   },
   "luma-discover:eohz9y": {
@@ -12533,5 +12533,157 @@
   "search:jmdhb": {
     "remindedForDeadline": false,
     "firstSeen": "2026-11-28T05:50:09.069Z"
+  },
+  "luma-discover:afdxgm": {
+    "remindedForDeadline": false,
+    "firstSeen": "2026-11-28T14:53:14.094Z"
+  },
+  "luma-discover:13n7dyw": {
+    "remindedForDeadline": false,
+    "firstSeen": "2026-11-28T14:53:14.094Z"
+  },
+  "luma-discover:1neq6zr": {
+    "remindedForDeadline": false,
+    "firstSeen": "2026-11-28T14:53:14.094Z"
+  },
+  "luma-discover:1vq8ko2": {
+    "remindedForDeadline": false,
+    "firstSeen": "2026-11-28T14:53:14.094Z"
+  },
+  "luma-discover:1g6vdaz": {
+    "remindedForDeadline": false,
+    "firstSeen": "2026-11-28T14:53:14.094Z"
+  },
+  "luma-discover:1hwg4sb": {
+    "remindedForDeadline": false,
+    "firstSeen": "2026-11-28T14:53:14.094Z"
+  },
+  "luma-discover:tu4rof": {
+    "remindedForDeadline": false,
+    "firstSeen": "2026-11-28T14:53:14.094Z"
+  },
+  "luma-discover:1tbvppk": {
+    "remindedForDeadline": true,
+    "firstSeen": "2026-11-28T14:53:14.094Z"
+  },
+  "luma-discover:1ml2viv": {
+    "remindedForDeadline": false,
+    "firstSeen": "2026-11-28T14:53:14.094Z"
+  },
+  "luma-discover:4j5cxg": {
+    "remindedForDeadline": true,
+    "firstSeen": "2026-11-28T14:53:14.094Z"
+  },
+  "search:11w1shm": {
+    "remindedForDeadline": false,
+    "firstSeen": "2026-11-28T14:53:14.094Z"
+  },
+  "search:7vuxju": {
+    "remindedForDeadline": false,
+    "firstSeen": "2026-11-28T14:53:14.094Z"
+  },
+  "search:4n1fl5": {
+    "remindedForDeadline": false,
+    "firstSeen": "2026-11-28T14:53:14.094Z"
+  },
+  "search:1kh8894": {
+    "remindedForDeadline": false,
+    "firstSeen": "2026-11-28T14:53:14.094Z"
+  },
+  "search:agmtuf": {
+    "remindedForDeadline": false,
+    "firstSeen": "2026-11-28T14:53:14.094Z"
+  },
+  "search:1sfw4yq": {
+    "remindedForDeadline": false,
+    "firstSeen": "2026-11-28T14:53:14.094Z"
+  },
+  "search:195ittc": {
+    "remindedForDeadline": false,
+    "firstSeen": "2026-11-28T14:53:14.094Z"
+  },
+  "search:6vqvnk": {
+    "remindedForDeadline": false,
+    "firstSeen": "2026-11-28T14:53:14.094Z"
+  },
+  "search:15cd5fs": {
+    "remindedForDeadline": false,
+    "firstSeen": "2026-11-28T14:53:14.094Z"
+  },
+  "search:1j427md": {
+    "remindedForDeadline": false,
+    "firstSeen": "2026-11-28T14:53:14.094Z"
+  },
+  "search:zgi3vx": {
+    "remindedForDeadline": false,
+    "firstSeen": "2026-11-28T14:53:14.094Z"
+  },
+  "search:1oishpm": {
+    "remindedForDeadline": false,
+    "firstSeen": "2026-11-28T14:53:14.094Z"
+  },
+  "search:puzeij": {
+    "remindedForDeadline": false,
+    "firstSeen": "2026-11-28T14:53:14.094Z"
+  },
+  "search:l7rvz1": {
+    "remindedForDeadline": false,
+    "firstSeen": "2026-11-28T14:53:14.094Z"
+  },
+  "search:zm7p8f": {
+    "remindedForDeadline": false,
+    "firstSeen": "2026-11-28T14:53:14.094Z"
+  },
+  "search:1wkg8ki": {
+    "remindedForDeadline": false,
+    "firstSeen": "2026-11-28T14:53:14.094Z"
+  },
+  "search:n428b7": {
+    "remindedForDeadline": false,
+    "firstSeen": "2026-11-28T14:53:14.094Z"
+  },
+  "search:w1iza5": {
+    "remindedForDeadline": false,
+    "firstSeen": "2026-11-28T14:53:14.094Z"
+  },
+  "search:5rrms9": {
+    "remindedForDeadline": false,
+    "firstSeen": "2026-11-28T14:53:14.094Z"
+  },
+  "search:vs2mxp": {
+    "remindedForDeadline": false,
+    "firstSeen": "2026-11-28T14:53:14.094Z"
+  },
+  "search:kyxamn": {
+    "remindedForDeadline": false,
+    "firstSeen": "2026-11-28T14:53:14.094Z"
+  },
+  "search:1ii04z3": {
+    "remindedForDeadline": false,
+    "firstSeen": "2026-11-28T14:53:14.094Z"
+  },
+  "search:5p2s8t": {
+    "remindedForDeadline": false,
+    "firstSeen": "2026-11-28T14:53:14.094Z"
+  },
+  "search:1sgf031": {
+    "remindedForDeadline": false,
+    "firstSeen": "2026-11-28T14:53:14.094Z"
+  },
+  "search:ot1s8b": {
+    "remindedForDeadline": false,
+    "firstSeen": "2026-11-28T14:53:14.094Z"
+  },
+  "search:140zikj": {
+    "remindedForDeadline": false,
+    "firstSeen": "2026-11-28T14:53:14.094Z"
+  },
+  "search:zww9g0": {
+    "remindedForDeadline": false,
+    "firstSeen": "2026-11-28T14:53:14.094Z"
+  },
+  "search:12h16fg": {
+    "remindedForDeadline": false,
+    "firstSeen": "2026-11-28T14:53:14.094Z"
   }
 }
